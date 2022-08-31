@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\SolarSystem.cs" />
     <Compile Include="Assets\ChaseCam.cs" />
+    <Compile Include="Assets\OrbitMaster.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

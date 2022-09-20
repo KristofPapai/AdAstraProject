@@ -12,6 +12,7 @@ public class OrbitMaster : MonoBehaviour
 
     public GameObject prefab;
     public GameObject parentPrefab;
+    public GameObject ChaseCamera;
     public float rotationSpeed;
     public float dampAnt;
     public Button hudbutton;
@@ -37,13 +38,14 @@ public class OrbitMaster : MonoBehaviour
             float rangeDecider = Random.Range(60, 120);
             float newX = lastX + rangeDecider;
             lastX = newX;
-            var parentPlanet = Instantiate(parentPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)); //inside the sun
+            float orbitrotation = Random.Range(-5, 5);
+            var parentPlanet = Instantiate(parentPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, orbitrotation)); //inside the sun
             parentPlanet.GetComponent<RotateMaster>().dampAnt = dampningUpdate;
             dampningUpdate -= 0.5f;
             var childPlanet = Instantiate(prefab, new Vector3(newX, 0, 0), Quaternion.identity);
             int typeOfPlanet = Random.Range(0, 4);
             float sizeOfPlanet;
-            int moonDecider = Random.Range(0, 3); //ha 0-nál több holdat akar generálni akkor majd figyelni kell a oldak távolságára
+             //ha 0-nál több holdat akar generálni akkor majd figyelni kell a oldak távolságára
 
             switch (typeOfPlanet)
             {
@@ -66,7 +68,22 @@ public class OrbitMaster : MonoBehaviour
                     break;
             }
 
-            //childPlanet.transform.parent = parentPlanet.transform;
+            float tempX = childPlanet.transform.localPosition.x + 30;
+            var ChaserCam = Instantiate(ChaseCamera, new Vector3(tempX, 10, 0), Quaternion.Euler(25,0,0));
+            ChaserCam.transform.parent = childPlanet.transform;
+            childPlanet.transform.parent = parentPlanet.transform;
+
+
+            //hold generálás
+            //int moonDecider = Random.Range(0, 3);
+            //var parentMoon = Instantiate(parentPrefab, childPlanet.transform.localPosition, Quaternion.Euler(0, 0, 0)); //inside the sun
+            //var childMoon = Instantiate(prefab, new Vector3(25, 0, 0), Quaternion.identity);
+            //childMoon.transform.localScale = new Vector3(0,0,0);
+
+
+            //childMoon.transform.parent = parentMoon.transform;
+            //parentMoon.transform.Rotate(0, newRotation, 0);
+
 
             //parentPlanet.transform.Rotate(0, newRotation, 0);
         }

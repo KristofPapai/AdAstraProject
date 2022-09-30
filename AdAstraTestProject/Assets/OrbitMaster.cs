@@ -39,7 +39,7 @@ public class OrbitMaster : MonoBehaviour
             float newX = lastX + rangeDecider;
             lastX = newX;
             float orbitrotation = Random.Range(-5, 5);
-            var parentPlanet = Instantiate(parentPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, orbitrotation)); //inside the sun
+            var parentPlanet = Instantiate(parentPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)); //inside the sun lehet itt van probléma mivel nem a küzéppont körül forog normálisan a bolygó a (0,0,0) pontal lesz valami
             parentPlanet.GetComponent<RotateMaster>().dampAnt = dampningUpdate;
             dampningUpdate -= 0.5f;
             var childPlanet = Instantiate(prefab, new Vector3(newX, 0, 0), Quaternion.identity);
@@ -72,6 +72,7 @@ public class OrbitMaster : MonoBehaviour
             var ChaserCam = Instantiate(ChaseCamera, new Vector3(tempX, 10, 0), Quaternion.Euler(25,0,0));
             ChaserCam.transform.parent = childPlanet.transform;
             childPlanet.transform.parent = parentPlanet.transform;
+            parentPlanet.transform.rotation = Quaternion.Euler(0, 0, orbitrotation);
 
 
             //hold generálás

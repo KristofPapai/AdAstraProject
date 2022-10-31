@@ -31,9 +31,11 @@ public class OrbitMaster : MonoBehaviour
         float numberOfPlanets = Random.Range(5, 11);
         float maxOrbitRing = numberOfPlanets * 80;
         float dampningUpdate = 6;
+        string[] solType = new string[] { "WD", "WR", "RG", "BD", "NE" };
+        string inSol = solType[Random.Range(0, solType.Length)];
         for (int i = 0; i < numberOfPlanets; i++)
         {
-            
+
             float newRotation = Random.Range(0, 360);
             float rangeDecider = Random.Range(60, 120);
             float newX = lastX + rangeDecider;
@@ -43,9 +45,13 @@ public class OrbitMaster : MonoBehaviour
             parentPlanet.GetComponent<RotateMaster>().dampAnt = dampningUpdate;
             dampningUpdate -= 0.5f;
             var childPlanet = Instantiate(prefab, new Vector3(newX, 0, 0), Quaternion.identity);
+
+
+            childPlanet.name = planetNameGenerator(inSol);
+
             int typeOfPlanet = Random.Range(0, 4);
             float sizeOfPlanet;
-             //ha 0-nál több holdat akar generálni akkor majd figyelni kell a oldak távolságára
+            //ha 0-nál több holdat akar generálni akkor majd figyelni kell a oldak távolságára
 
             switch (typeOfPlanet)
             {
@@ -69,25 +75,22 @@ public class OrbitMaster : MonoBehaviour
             }
 
             float tempX = childPlanet.transform.localPosition.x + 30;
-            var ChaserCam = Instantiate(ChaseCamera, new Vector3(tempX, 10, 0), Quaternion.Euler(25,0,0));
-            ChaserCam.transform.parent = childPlanet.transform;
+            //var ChaserCam = Instantiate(ChaseCamera, new Vector3(tempX, 10, 0), Quaternion.Euler(25,0,0));
+            //ChaserCam.transform.parent = childPlanet.transform;
             childPlanet.transform.parent = parentPlanet.transform;
             parentPlanet.transform.rotation = Quaternion.Euler(0, 0, orbitrotation);
+            parentPlanet.name = "parent " + childPlanet.name;
 
-
-            //hold generálás
-            //int moonDecider = Random.Range(0, 3);
-            //var parentMoon = Instantiate(parentPrefab, childPlanet.transform.localPosition, Quaternion.Euler(0, 0, 0)); //inside the sun
-            //var childMoon = Instantiate(prefab, new Vector3(25, 0, 0), Quaternion.identity);
-            //childMoon.transform.localScale = new Vector3(0,0,0);
-
-
-            //childMoon.transform.parent = parentMoon.transform;
-            //parentMoon.transform.Rotate(0, newRotation, 0);
-
-
-            //parentPlanet.transform.Rotate(0, newRotation, 0);
         }
+    }
+
+    public string planetNameGenerator(string solType)
+    {
+        //string[] solType = new string[] { "WD", "WR", "RG", "BD", "NE" };
+        int starCord = Random.Range(1,int.MaxValue);
+        string[] potential = new string[] { "G", "M", "P", "B" };
+        return solType + " " + starCord + potential[Random.Range(0, potential.Length)];
+
     }
 
 }

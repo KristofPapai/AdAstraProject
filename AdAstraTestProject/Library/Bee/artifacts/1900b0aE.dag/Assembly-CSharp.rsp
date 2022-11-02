@@ -368,6 +368,8 @@
 "Assets/Scripts/PorceduralPlanet/ShapeSettings.cs"
 "Assets/Scripts/PorceduralPlanet/SimpleNoiseFilter.cs"
 "Assets/Scripts/PorceduralPlanet/TerrainFace.cs"
+"Assets/Scripts/Resource/PlanetProperties.cs"
+"Assets/Scripts/Resource/ResourceMaster.cs"
 "Assets/Scripts/RestartGame.cs"
 "Assets/Scripts/RotateMaster.cs"
 "Assets/Scripts/SolarSystem.cs"

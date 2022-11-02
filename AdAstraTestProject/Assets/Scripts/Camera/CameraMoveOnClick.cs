@@ -19,6 +19,7 @@ public class CameraMoveOnClick : MonoBehaviour
 
     private bool camResetMode = false;
     private bool GUIControl = false;
+    private bool startCam = true;
 
     private Vector3 scrollViewVector = Vector3.zero;
     public Rect dropDownRect = new Rect(125, 50, 125, 300);
@@ -31,55 +32,61 @@ public class CameraMoveOnClick : MonoBehaviour
     private void OnGUI()
     {
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
-        if (GUI.Button(new Rect((dropDownRect.x - 100), dropDownRect.y, dropDownRect.width, 25), ""))
+        if (startCam == false)
         {
-            if (!show)
+
+
+            if (GUI.Button(new Rect((dropDownRect.x - 100), dropDownRect.y, dropDownRect.width, 25), ""))
             {
-                show = true;
+                if (!show)
+                {
+                    show = true;
+                }
+                else
+                {
+                    show = false;
+                }
+            }
+            if (show)
+            {
+                scrollViewVector = GUI.BeginScrollView(new Rect((dropDownRect.x - 100), (dropDownRect.y + 25), dropDownRect.width, dropDownRect.height), scrollViewVector, new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))));
+                GUI.Box(new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))), "");
+                for (int index = 0; index < planets.Length; index++)
+                {
+                    if (GUI.Button(new Rect(0, (index * 25), dropDownRect.height, 25), ""))
+                    {
+                        show = false;
+                        indexNumber = index;
+                    }
+                    GUI.Label(new Rect(5, (index * 25), dropDownRect.height, 25), planets[index].name);
+                }
+                GUI.EndScrollView();
             }
             else
             {
-                show = false;
-            }
-        }
-        if (show)
-        {
-            scrollViewVector = GUI.BeginScrollView(new Rect((dropDownRect.x - 100), (dropDownRect.y + 25), dropDownRect.width, dropDownRect.height), scrollViewVector, new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))));
-            GUI.Box(new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))), "");
-            for (int index = 0; index < planets.Length; index++)
-            {
-                if (GUI.Button(new Rect(0, (index * 25), dropDownRect.height, 25), ""))
-                {
-                    show = false;
-                    indexNumber = index;
-                }
-                GUI.Label(new Rect(5, (index * 25), dropDownRect.height, 25), planets[index].name);
-                //CameraControll(planets[index].name);
-            }
-            GUI.EndScrollView();
-        }
-        else
-        {
-            GUI.Label(new Rect((dropDownRect.x - 95), dropDownRect.y, 300, 25), planets[indexNumber].name);
-            Debug.Log(planets[indexNumber].name);
+                GUI.Label(new Rect((dropDownRect.x - 95), dropDownRect.y, 300, 25), planets[indexNumber].name);
+                //Debug.Log(planets[indexNumber].name);
 
-            if (GUIControl)
-            {
-                selected = GameObject.Find(planets[indexNumber].name);
-
-                float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
-                if (camResetMode == false)
+                if (GUIControl)
                 {
-                    //selected = GameObject.Find(planets[indexNumber].name);
-                    var step = speed * Time.deltaTime;
-                    mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
-                    distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
+                    selected = GameObject.Find(planets[indexNumber].name);
 
-                }
-                if (distance < 10)
-                {
-                    camResetMode = true;
-                    mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
+                    float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
+                    if (camResetMode == false)
+                    {
+                        //selected = GameObject.Find(planets[indexNumber].name);
+                        var step = speed * Time.deltaTime;
+                        //mainCamera.transform.LookAt(selected.transform);
+                        mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
+                        distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
+
+                    }
+                    if (distance < 10)
+                    {
+                        camResetMode = true;
+                        mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
+                        this.gameObject.transform.LookAt(GameObject.Find("Cam").transform);
+                    }
                 }
             }
         }
@@ -96,6 +103,7 @@ public class CameraMoveOnClick : MonoBehaviour
         {
             camResetMode = false;
             GUIControl = false;
+            startCam = false;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.SphereCast(ray,30, out hit, 1000f) && !EventSystem.current.IsPointerOverGameObject())
@@ -117,7 +125,7 @@ public class CameraMoveOnClick : MonoBehaviour
             if (distance != 0)
             {
                 mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
-                Debug.Log("shake");
+                //Debug.Log("shake");
             }
             else
             {

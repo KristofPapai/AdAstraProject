@@ -111,7 +111,7 @@ public class CameraMoveOnClick : MonoBehaviour
                 if (hit.transform.tag == "Celestial" && selected != hit.transform.gameObject && hit.transform.gameObject.layer != 4)
                 {
                     selected = hit.transform.gameObject;
-                    Debug.Log("Celestial Hit");
+                    //Debug.Log("Celestial Hit");
                     moveToCelestial = true;
                     chaseCam = false;
                 }

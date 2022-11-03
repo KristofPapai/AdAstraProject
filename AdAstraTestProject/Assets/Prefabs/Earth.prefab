@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 283432554138090269}
   - component: {fileID: 5791414761632849944}
   - component: {fileID: 7011379103277481189}
+  - component: {fileID: 5676585740422775767}
   m_Layer: 0
   m_Name: Earth
   m_TagString: Celestial
@@ -255,3 +256,33 @@ MonoBehaviour:
   GenInfluence: 0
   GenTech: 0
   FloatingTextPrefab: {fileID: 2964250974393494614, guid: cb7081db7f047344fa5b8f5a36793cbc, type: 3}
+--- !u!114 &5676585740422775767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283432554138090211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4724992aa9db9543a362279014149b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UpgradeBuildings:
+  - FOB
+  - Outpost
+  - Permament Base Facility
+  lvl1Buildings:
+  - Rover Hangar
+  - Research Quarters
+  - Operation Deck
+  lvl2Buildings:
+  - Apartments
+  - Surface Mining
+  - Warehouses
+  lvl3Buildings:
+  - Core Mining
+  - Starport
+  - BioDome
+  BuiltUpgradeBuildings: []
+  BuiltGroundBuildings: []

@@ -9,6 +9,7 @@ public class PlanetProperties : MonoBehaviour
     public double GenUniEuros;
     public double GenInfluence;
     public double GenTech;
+    public bool IsMotherPlanet = false;
 
     List<string> RareMaterials = new List<string>() { "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium" }; // "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium"
     List<string> PlanetRareMaterials = new List<string>();
@@ -20,9 +21,9 @@ public class PlanetProperties : MonoBehaviour
     {
 
         
-        GenUniEuros = Random.Range(1, 11);
-        GenInfluence = Random.Range(1, 11);
-        GenTech = Random.Range(1, 11);
+        GenUniEuros = 0;
+        GenInfluence = 0;
+        GenTech = 0;
 
         int materialCount = Random.Range(1, 5);
         bool whileClose = false;
@@ -37,6 +38,12 @@ public class PlanetProperties : MonoBehaviour
             }
 
         } while (counter != materialCount);
+        if (IsMotherPlanet == true)
+        {
+            GenUniEuros = 20;
+            GenInfluence = 5;
+            GenTech = 2;
+        }
 
     }
 
@@ -48,7 +55,10 @@ public class PlanetProperties : MonoBehaviour
 
     public void OnGUI()
     {
-        MaterialListing();
+        if (this.gameObject.GetComponent<PlanetProperties>().IsMotherPlanet == false)
+        {
+            MaterialListing();
+        }
     }
 
     public void MaterialListing()
@@ -67,6 +77,5 @@ public class PlanetProperties : MonoBehaviour
             GUI.Label(new Rect(((Screen.width)/2) - 300, (Screen.height/2) - 100, 300, 300), builder);
         }
         
-
     }
 }

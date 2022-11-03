@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -65,6 +66,7 @@ public class OrbitMaster : MonoBehaviour
                                             "Trypso 12RZ",
                                             "Neron I50"};
         string inSol = solType[Random.Range(0, solType.Length)];
+        bool haveMotherPlanet = false;
         List<string> choosenNames = new List<string>();
         for (int i = 0; i < numberOfPlanets; i++)
         {
@@ -101,17 +103,34 @@ public class OrbitMaster : MonoBehaviour
                 case 0:
                     sizeOfPlanet = Random.Range(4, 7);
                     childPlanet.transform.localScale = new Vector3(sizeOfPlanet, sizeOfPlanet, sizeOfPlanet);
+                    if (!haveMotherPlanet)
+                    {
+                        childPlanet.GetComponent<PlanetProperties>().IsMotherPlanet = true;
+                        haveMotherPlanet=true;
+                    }
                     //Debug.Log("rocky planet");
                     break;
                 case 1:
                     sizeOfPlanet = Random.Range(20, 30);
                     childPlanet.transform.localScale = new Vector3(sizeOfPlanet, sizeOfPlanet, sizeOfPlanet);
                     //Debug.Log("Gas giant");
+                    if (!haveMotherPlanet)
+                    {
+                        childPlanet.GetComponent<PlanetProperties>().IsMotherPlanet = true;
+                        haveMotherPlanet = true;
+
+                    }
                     break;
                 case 3:
                     sizeOfPlanet = Random.Range(2, 5);
                     childPlanet.transform.localScale = new Vector3(sizeOfPlanet, sizeOfPlanet, sizeOfPlanet);
                     //Debug.Log("dwarf planet");
+                    if (!haveMotherPlanet)
+                    {
+                        childPlanet.GetComponent<PlanetProperties>().IsMotherPlanet = true;
+                        haveMotherPlanet = true;
+
+                    }
                     break;
                 default:
                     break;

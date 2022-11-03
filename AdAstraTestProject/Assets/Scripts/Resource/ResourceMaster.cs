@@ -72,7 +72,7 @@ public class ResourceMaster : MonoBehaviour
         }
     }
 
-    Resources resourceMaster = new Resources(300,300,300);
+    Resources resourceMaster = new Resources(30000,30000,30000);
     public Camera mainCamera;
 
     [SerializeField] private float _duration = 5f;
@@ -96,25 +96,52 @@ public class ResourceMaster : MonoBehaviour
 
     }
 
+
+    public double OutUniEuros = 0;
+    public double OutInfluence = 0;
+    public double OutTech = 0;
+
+
     void Update()
     {
         _timer += Time.deltaTime;
         if (_timer >= _duration)
         {
             planets = GameObject.FindGameObjectsWithTag("Celestial");
-            Debug.Log(planets.Length);
+            //Debug.Log(planets.Length);
             _timer = 0f;
-            Debug.Log("intervall");
+            //Debug.Log("intervall");
             foreach (GameObject planet in planets)
             {
                 resourceMaster.AddUniEuros(planet.GetComponent<PlanetProperties>().GenUniEuros);
                 resourceMaster.AddInfluence(planet.GetComponent<PlanetProperties>().GenInfluence);
                 resourceMaster.AddTech(planet.GetComponent<PlanetProperties>().GenTech);
 
-                Debug.Log(resourceMaster.UniEuros);
-                Debug.Log(resourceMaster.Influence);
-                Debug.Log(resourceMaster.Tech);
+                OutUniEuros = resourceMaster.UniEuros;
+                OutInfluence = resourceMaster.Influence;
+                OutTech = resourceMaster.Tech;
             }
         }
+    }
+
+    public void AddUniEuros(double amount)
+    {
+
+        resourceMaster.AddUniEuros(amount);
+
+    }
+
+    public void AddTech(double amount)
+    {
+
+        resourceMaster.AddTech(amount);
+
+    }
+
+    public void AddInfluence(double amount)
+    {
+
+        resourceMaster.AddInfluence(amount);
+
     }
 }

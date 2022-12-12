@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 //using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using UnityEngine.UI;
 
 public class CameraMoveOnClick : MonoBehaviour
 {
@@ -32,64 +33,64 @@ public class CameraMoveOnClick : MonoBehaviour
     private void OnGUI()
     {
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
-        if (startCam == false)
-        {
+        //if (startCam == false)
+        //{
 
 
-            if (GUI.Button(new Rect((dropDownRect.x - 100), dropDownRect.y, dropDownRect.width, 25), ""))
-            {
-                if (!show)
-                {
-                    show = true;
-                }
-                else
-                {
-                    show = false;
-                }
-            }
-            if (show)
-            {
-                scrollViewVector = GUI.BeginScrollView(new Rect((dropDownRect.x - 100), (dropDownRect.y + 25), dropDownRect.width, dropDownRect.height), scrollViewVector, new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))));
-                GUI.Box(new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))), "");
-                for (int index = 0; index < planets.Length; index++)
-                {
-                    if (GUI.Button(new Rect(0, (index * 25), dropDownRect.height, 25), ""))
-                    {
-                        show = false;
-                        indexNumber = index;
-                    }
-                    GUI.Label(new Rect(5, (index * 25), dropDownRect.height, 25), planets[index].name);
-                }
-                GUI.EndScrollView();
-            }
-            else
-            {
-                GUI.Label(new Rect((dropDownRect.x - 95), dropDownRect.y, 300, 25), planets[indexNumber].name);
-                //Debug.Log(planets[indexNumber].name);
+        //    if (GUI.Button(new Rect((dropDownRect.x - 100), dropDownRect.y, dropDownRect.width, 25), ""))
+        //    {
+        //        if (!show)
+        //        {
+        //            show = true;
+        //        }
+        //        else
+        //        {
+        //            show = false;
+        //        }
+        //    }
+        //    if (show)
+        //    {
+        //        scrollViewVector = GUI.BeginScrollView(new Rect((dropDownRect.x - 100), (dropDownRect.y + 25), dropDownRect.width, dropDownRect.height), scrollViewVector, new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))));
+        //        GUI.Box(new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Length * 25))), "");
+        //        for (int index = 0; index < planets.Length; index++)
+        //        {
+        //            if (GUI.Button(new Rect(0, (index * 25), dropDownRect.height, 25), ""))
+        //            {
+        //                show = false;
+        //                indexNumber = index;
+        //            }
+        //            GUI.Label(new Rect(5, (index * 25), dropDownRect.height, 25), planets[index].name);
+        //        }
+        //        GUI.EndScrollView();
+        //    }
+        //    else
+        //    {
+        //        GUI.Label(new Rect((dropDownRect.x - 95), dropDownRect.y, 300, 25), planets[indexNumber].name);
+        //        //Debug.Log(planets[indexNumber].name);
 
-                if (GUIControl)
-                {
-                    selected = GameObject.Find(planets[indexNumber].name);
+        //        if (GUIControl)
+        //        {
+        //            selected = GameObject.Find(planets[indexNumber].name);
 
-                    float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
-                    if (camResetMode == false)
-                    {
-                        //selected = GameObject.Find(planets[indexNumber].name);
-                        var step = speed * Time.deltaTime;
-                        //mainCamera.transform.LookAt(selected.transform);
-                        mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
-                        distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
+        //            float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
+        //            if (camResetMode == false)
+        //            {
+        //                //selected = GameObject.Find(planets[indexNumber].name);
+        //                var step = speed * Time.deltaTime;
+        //                //mainCamera.transform.LookAt(selected.transform);
+        //                mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
+        //                distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
 
-                    }
-                    if (distance < 10)
-                    {
-                        camResetMode = true;
-                        mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
-                        this.gameObject.transform.LookAt(GameObject.Find("Cam").transform);
-                    }
-                }
-            }
-        }
+        //            }
+        //            if (distance < 10)
+        //            {
+        //                camResetMode = true;
+        //                mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
+        //                this.gameObject.transform.LookAt(GameObject.Find("Cam").transform);
+        //            }
+        //        }
+        //    }
+        //}
     }
 
     public void CameraReset()
@@ -152,11 +153,54 @@ public class CameraMoveOnClick : MonoBehaviour
 
     }
 
+
+    public GameObject buttonPrefab;
+    public GameObject canvas;
+
     void Start()
     {
         cameraStartPos = mainCamera.transform.position;
+        GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
+        float buttonStack = 15;
+        float h = canvas.GetComponent<RectTransform>().rect.height;
+        float w = canvas.GetComponent<RectTransform>().rect.width;
+        foreach (GameObject planet in planets)
+        {
+            GameObject button = Instantiate(buttonPrefab);
+            button.transform.SetParent(canvas.transform);
+            button.transform.localPosition = new Vector3((-60)-(w/3), (h/2) - buttonStack, 0);
+
+            buttonStack += 30;
+            button.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+            button.transform.rotation = canvas.transform.rotation;
+            button.GetComponent<Button>().onClick.AddListener(OnClick);
+            button.GetComponentInChildren<TMP_Text>().text = planet.name;
+
+        }
+
     }
 
+    void OnClick()
+    {
+        string PlanetName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
+        selected = GameObject.Find(PlanetName);
+
+
+        float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
+
+            //selected = GameObject.Find(planets[indexNumber].name);
+            var step = speed * Time.deltaTime;
+            //mainCamera.transform.LookAt(selected.transform);
+            mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
+            distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
+
+        if (distance < 10)
+        {
+            camResetMode = true;
+            mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
+            this.gameObject.transform.LookAt(GameObject.Find("Cam").transform);
+        }
+    }
 
 
     void Update()

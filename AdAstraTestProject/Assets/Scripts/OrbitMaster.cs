@@ -137,10 +137,9 @@ public class OrbitMaster : MonoBehaviour
             }
 
             float tempX = childPlanet.transform.localPosition.x + 30;
-            //var ChaserCam = Instantiate(ChaseCamera, new Vector3(tempX, 10, 0), Quaternion.Euler(25,0,0));
-            //ChaserCam.transform.parent = childPlanet.transform;
+            float randomRotation = Random.Range(0, 361);
             childPlanet.transform.parent = parentPlanet.transform;
-            parentPlanet.transform.rotation = Quaternion.Euler(0, 0, orbitrotation);
+            parentPlanet.transform.rotation = Quaternion.Euler(0, randomRotation, orbitrotation);
             parentPlanet.name = "parent " + childPlanet.name;
             planets.Add(childPlanet);
 
@@ -151,83 +150,4 @@ public class OrbitMaster : MonoBehaviour
     private Vector2 scrollViewVector = Vector2.zero;
     public Rect dropDownRect = new Rect(125, 50, 125, 300);
     public static string[] list = { "List of Planets in the system" };
-
-    int indexNumber;
-    bool show = false;
-
-    //private void OnGUI()
-    //{
-    //    if (GUI.Button(new Rect((dropDownRect.x - 100), dropDownRect.y, dropDownRect.width, 25), ""))
-    //    {
-    //        if (!show)
-    //        {
-    //            show = true;
-    //        }
-    //        else
-    //        {
-    //            show = false;
-    //        }
-    //    }
-    //    if (show)
-    //    {
-    //        scrollViewVector = GUI.BeginScrollView(new Rect((dropDownRect.x - 100), (dropDownRect.y + 25), dropDownRect.width, dropDownRect.height), scrollViewVector, new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (list.Length * 25))));
-
-    //        GUI.Box(new Rect(0, 0, dropDownRect.width, Mathf.Max(dropDownRect.height, (planets.Count * 25))), "");
-
-    //        for (int index = 0; index < planets.Count; index++)
-    //        {
-
-    //            if (GUI.Button(new Rect(0, (index * 25), dropDownRect.height, 25), ""))
-    //            {
-    //                show = false;
-    //                indexNumber = index;
-    //            }
-
-    //            GUI.Label(new Rect(5, (index * 25), dropDownRect.height, 25), planets[index].name);
-
-    //        }
-
-            
-
-    //        GUI.EndScrollView();
-    //    }
-    //    else
-    //    {
-
-    //        GUI.Label(new Rect((dropDownRect.x - 95), dropDownRect.y, 300, 25), planets[indexNumber].name);
-
-    //        CamMoveToListTarget(planets[indexNumber].name);
-    //    }
-    //}
-
-    //private bool chaseCam = false;
-    //public float speed = 100.0f;
-    //public void CamMoveToListTarget(string planetName)
-    //{
-
-    //    GameObject selected = GameObject.Find(planetName);
-
-    //    var step = speed * Time.deltaTime;
-    //    float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
-    //    if (distance != 0)
-    //    {
-    //        mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
-    //        //mainCamera.transform.LookAt(selected.transform);
-    //        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
-    //        Debug.Log("shake");
-            
-    //    }
-    //    else
-    //    {
-    //        chaseCam = true;
-
-    //    }
-    //    if (chaseCam)
-    //    {
-    //        mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
-    //        //mainCamera.transform.LookAt(selected.transform);
-    //        //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, speed * Time.deltaTime);
-    //    }
-
-    //}
 }

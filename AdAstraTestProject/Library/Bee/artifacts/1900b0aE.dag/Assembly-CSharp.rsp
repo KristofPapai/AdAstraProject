@@ -356,6 +356,7 @@
 "Assets/Scripts/Camera/CameraMoveOnClick.cs"
 "Assets/Scripts/ChaseCam.cs"
 "Assets/Scripts/ConditionalHideAttribute.cs"
+"Assets/Scripts/DinamicUI.cs"
 "Assets/Scripts/LookAtTarget.cs"
 "Assets/Scripts/OrbitMaster.cs"
 "Assets/Scripts/PorceduralPlanet/ColorSettings.cs"

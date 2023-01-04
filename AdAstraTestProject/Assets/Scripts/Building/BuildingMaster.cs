@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Device;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 using Screen = UnityEngine.Screen;
 
 public class BuildingMaster : MonoBehaviour
@@ -19,29 +22,42 @@ public class BuildingMaster : MonoBehaviour
     public List<string> lvl2Buildings = new List<string>() { "Apartments", "Surface Mining", "Warehouses" }; //mining of rare materials and stockpileing it also more income
     public List<string> lvl3Buildings = new List<string>() { "Core Mining", "Starport", "BioDome" }; //shipping routes and cargo ports
 
+    public List<string> AbleToBuild = new List<string>();
+
     public List<string> BuiltUpgradeBuildings = new List<string>();
     public List<string> BuiltGroundBuildings = new List<string>();
 
+    public GameObject buttonPrefab;
+    public GameObject canvas;
+    public GameObject panlePrefab;
+
+    public TMP_Dropdown dropdown;
 
     void Start()
     {
-        
-    }
+        dropdown = GameObject.Find("BuildingsDropDown").GetComponent<TMP_Dropdown>();
 
-    // Update is called once per frame
+        dropdown.onValueChanged.AddListener(delegate {
+            DropdownValueChanged(dropdown);
+        });
+
+    }
     void Update()
     {
-        
+
     }
 
     private void OnGUI()
     {
+        canvas = GameObject.FindGameObjectWithTag("HUD");
         if (Vector3.Distance(GameObject.Find("Cam").transform.position, this.transform.position) < 70)
         {
             
             if (this.gameObject.GetComponent<PlanetProperties>().IsMotherPlanet == false)
             {
                 BuildingBuilder();
+
+
             }
         
         }
@@ -57,8 +73,17 @@ public class BuildingMaster : MonoBehaviour
                 if (enoughResource_UE_TECH(1000,100))
                 {
                     BuiltUpgradeBuildings.Add("FOB");
+                    UpgradeBuildings.Remove("FOB");
+                    AbleToBuild.AddRange(lvl1Buildings);
+                    dropdown.ClearOptions();
+                    dropdown.AddOptions(AbleToBuild);
                     Debug.Log("Built FOB");
                     GenerateMIT(20,0,5);
+                    
+                }
+                else
+                {
+                    //not enough resource
                 }
 
             }
@@ -70,11 +95,22 @@ public class BuildingMaster : MonoBehaviour
                 if (enoughResource_UE_TECH(3000, 200))
                 {
                     BuiltUpgradeBuildings.Add("Outpost");
+                    UpgradeBuildings.Remove("FOB");
                     Debug.Log("Built Outpost");
+                    AbleToBuild.AddRange(lvl2Buildings);
+                    dropdown.ClearOptions();
+                    dropdown.AddOptions(AbleToBuild);
                     GenerateMIT(120, 50, 10);
                 }
+                else
+                {
+
+                }
+
 
             }
+
+            
         }
         else if (BuiltUpgradeBuildings.Contains("Outpost") && BuiltUpgradeBuildings.Contains("FOB") && BuiltUpgradeBuildings.Count == 2)
         {
@@ -84,7 +120,12 @@ public class BuildingMaster : MonoBehaviour
                 {
                     BuiltUpgradeBuildings.Add("Permament Base Facility");
                     Debug.Log("Built Permament Base Facility");
+                    AbleToBuild.AddRange(lvl3Buildings);
+                    dropdown.ClearOptions();
+                    dropdown.AddOptions(AbleToBuild);
                     GenerateMIT(200, 150, 20);
+
+                    
                 }
 
             }
@@ -96,6 +137,24 @@ public class BuildingMaster : MonoBehaviour
 
     }
 
+
+    void DropdownValueChanged(TMP_Dropdown change)
+    {
+        Debug.Log(change.value);
+        //sokszor irja ki mert meghivódik töbször ez a szar
+
+
+
+        //string temp_base_name = AbleToBuild[change.value];
+        //AbleToBuild.Remove(temp_base_name);
+        //dropdown.ClearOptions();
+        //dropdown.AddOptions(AbleToBuild);
+    }
+
+    public void OnClick()
+    {
+    
+    }
 
     public void ShowBuiltBuilings()
     {

@@ -18,7 +18,7 @@ public class BuildingMaster : MonoBehaviour
                                                                                                             //Lvl2: 3000+200
                                                                                                             //Lvl3: 5000+300
 
-    public List<string> lvl1Buildings = new List<string>() { "Rover Hangar", "Research Quarters", "Operation Deck" }; //making a small ammount of money and tech
+    public List<string> lvl1Buildings = new List<string>() { "dsad","Rover Hangar 200", "Research Quarters", "Operation Deck" }; //making a small ammount of money and tech
     public List<string> lvl2Buildings = new List<string>() { "Apartments", "Surface Mining", "Warehouses" }; //mining of rare materials and stockpileing it also more income
     public List<string> lvl3Buildings = new List<string>() { "Core Mining", "Starport", "BioDome" }; //shipping routes and cargo ports
 
@@ -36,7 +36,6 @@ public class BuildingMaster : MonoBehaviour
     void Start()
     {
         dropdown = GameObject.Find("BuildingsDropDown").GetComponent<TMP_Dropdown>();
-
         dropdown.onValueChanged.AddListener(delegate {
             DropdownValueChanged(dropdown);
         });
@@ -141,8 +140,14 @@ public class BuildingMaster : MonoBehaviour
     void DropdownValueChanged(TMP_Dropdown change)
     {
         Debug.Log(change.value);
-        //sokszor irja ki mert meghivódik töbször ez a szar
 
+        //sokszor irja ki mert meghivódik töbször ez a szar
+        //miután kivettuk az elemet 
+
+        if (AbleToBuild[change.value] != "")
+        {
+
+        }
 
 
         //string temp_base_name = AbleToBuild[change.value];

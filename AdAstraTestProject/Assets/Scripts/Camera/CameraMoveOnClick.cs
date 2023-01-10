@@ -44,6 +44,7 @@ public class CameraMoveOnClick : MonoBehaviour
             camResetMode = false;
             GUIControl = false;
             startCam = false;
+            moveToCelestial = true;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.SphereCast(ray,30, out hit, 10000f) && !EventSystem.current.IsPointerOverGameObject())
@@ -99,6 +100,7 @@ public class CameraMoveOnClick : MonoBehaviour
 
     public GameObject buttonPrefab;
     public GameObject canvas;
+    public GameObject verticalLayout;
 
     void Start()
     {
@@ -110,11 +112,11 @@ public class CameraMoveOnClick : MonoBehaviour
         foreach (GameObject planet in planets)
         {
             GameObject button = Instantiate(buttonPrefab);
-            button.transform.SetParent(canvas.transform);
+            button.transform.SetParent(verticalLayout.transform);
             button.transform.localPosition = new Vector3((-60)-(w/3), (h/2) - buttonStack, 0);
 
-            buttonStack += 30;
-            button.transform.localScale = new Vector3(0.8f,0.8f,0.8f);
+            //buttonStack += 30;
+            button.transform.localScale = new Vector3(1f,1f,1f);
             button.transform.rotation = canvas.transform.rotation;
             button.GetComponent<Button>().onClick.AddListener(OnClick);
             button.GetComponentInChildren<TMP_Text>().text = planet.name;

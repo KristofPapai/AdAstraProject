@@ -274,7 +274,8 @@ MonoBehaviour:
   - Outpost
   - Permament Base Facility
   lvl1Buildings:
-  - Rover Hangar
+  - 
+  - Rover Hangar 200
   - Research Quarters
   - Operation Deck
   lvl2Buildings:
@@ -285,8 +286,10 @@ MonoBehaviour:
   - Core Mining
   - Starport
   - BioDome
+  AbleToBuild: []
   BuiltUpgradeBuildings: []
   BuiltGroundBuildings: []
-  buttonPrefab: {fileID: 5121029500002899447, guid: ea3978fde95e48b48a370831be4dd39b, type: 3}
+  buttonPrefab: {fileID: 0}
   canvas: {fileID: 0}
-  panlePrefab: {fileID: 9151628232107747619, guid: 19810a128c502f6479f08dbc30c34819, type: 3}
+  panlePrefab: {fileID: 0}
+  dropdown: {fileID: 0}

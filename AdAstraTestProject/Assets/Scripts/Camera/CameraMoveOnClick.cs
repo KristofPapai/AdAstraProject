@@ -58,7 +58,6 @@ public class CameraMoveOnClick : MonoBehaviour
                     List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
 
                     PopulateDropdown(dropdown, availablebuildings);
-                    dropdown.value = -1;
                 }
             }
         }
@@ -80,6 +79,12 @@ public class CameraMoveOnClick : MonoBehaviour
             if (chaseCam)
             {
                 mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
+                for (var i = ScrollBuilding.transform.childCount - 1; i >= 0; i--)
+                {
+                    Object.Destroy(ScrollBuilding.transform.GetChild(i).gameObject);
+                }
+                
+
             }
         }
         else
@@ -102,9 +107,13 @@ public class CameraMoveOnClick : MonoBehaviour
     public GameObject canvas;
     public GameObject verticalLayout;
 
+    public GameObject ScrollBuilding;
+
     void Start()
     {
         cameraStartPos = mainCamera.transform.position;
+
+
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
         float buttonStack = 15;
         float h = canvas.GetComponent<RectTransform>().rect.height;
@@ -134,7 +143,9 @@ public class CameraMoveOnClick : MonoBehaviour
         
 
         PopulateDropdown(dropdown,availablebuildings);
-        dropdown.value = -1;
+
+
+
 
         float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
         var step = speed * Time.deltaTime;
@@ -153,6 +164,7 @@ public class CameraMoveOnClick : MonoBehaviour
     {
         dropdown.ClearOptions();
         dropdown.AddOptions(options);
+
     }
 
     void Update()

@@ -18,7 +18,7 @@ public class BuildingMaster : MonoBehaviour
                                                                                                             //Lvl2: 3000+200
                                                                                                             //Lvl3: 5000+300
 
-    public List<string> lvl1Buildings = new List<string>() { "dsad","Rover Hangar 200", "Research Quarters", "Operation Deck" }; //making a small ammount of money and tech
+    public List<string> lvl1Buildings = new List<string>() { "","Rover Hangar 200", "Research Quarters", "Operation Deck" }; //making a small ammount of money and tech
     public List<string> lvl2Buildings = new List<string>() { "Apartments", "Surface Mining", "Warehouses" }; //mining of rare materials and stockpileing it also more income
     public List<string> lvl3Buildings = new List<string>() { "Core Mining", "Starport", "BioDome" }; //shipping routes and cargo ports
 
@@ -36,9 +36,7 @@ public class BuildingMaster : MonoBehaviour
     void Start()
     {
         dropdown = GameObject.Find("BuildingsDropDown").GetComponent<TMP_Dropdown>();
-        dropdown.onValueChanged.AddListener(delegate {
-            DropdownValueChanged(dropdown);
-        });
+
 
     }
     void Update()
@@ -46,8 +44,9 @@ public class BuildingMaster : MonoBehaviour
 
     }
 
-    private void OnGUI()
+    public void OnGUI()
     {
+
         canvas = GameObject.FindGameObjectWithTag("HUD");
         if (Vector3.Distance(GameObject.Find("Cam").transform.position, this.transform.position) < 70)
         {
@@ -61,6 +60,15 @@ public class BuildingMaster : MonoBehaviour
         
         }
     }
+
+
+    void ListenerCall()
+    {
+        dropdown.onValueChanged.AddListener(delegate {
+            DropdownValueChanged(dropdown, AbleToBuild);
+        });
+    }
+
 
     public void BuildingBuilder()
     {
@@ -77,7 +85,9 @@ public class BuildingMaster : MonoBehaviour
                     dropdown.ClearOptions();
                     dropdown.AddOptions(AbleToBuild);
                     Debug.Log("Built FOB");
+                    Debug.Log(AbleToBuild.Count);
                     GenerateMIT(20,0,5);
+                    ListenerCall();
                     
                 }
                 else
@@ -100,16 +110,9 @@ public class BuildingMaster : MonoBehaviour
                     dropdown.ClearOptions();
                     dropdown.AddOptions(AbleToBuild);
                     GenerateMIT(120, 50, 10);
+                    ListenerCall();
                 }
-                else
-                {
-
-                }
-
-
             }
-
-            
         }
         else if (BuiltUpgradeBuildings.Contains("Outpost") && BuiltUpgradeBuildings.Contains("FOB") && BuiltUpgradeBuildings.Count == 2)
         {
@@ -123,8 +126,9 @@ public class BuildingMaster : MonoBehaviour
                     dropdown.ClearOptions();
                     dropdown.AddOptions(AbleToBuild);
                     GenerateMIT(200, 150, 20);
+                    ListenerCall();
 
-                    
+
                 }
 
             }
@@ -137,34 +141,24 @@ public class BuildingMaster : MonoBehaviour
     }
 
 
-    void DropdownValueChanged(TMP_Dropdown change)
+    void DropdownValueChanged(TMP_Dropdown change,List<string> temp)
     {
-        Debug.Log(change.value);
-
-        //sokszor irja ki mert meghivódik töbször ez a szar
-        //miután kivettuk az elemet 
-
-        if (AbleToBuild[change.value] != "")
+        Debug.Log(temp.Count);
+        if (AbleToBuild[change.value] == "")
+        {
+            Debug.Log("Empty Selection");
+        }
+        else
         {
 
+            //switchCasemaybe
+
+            //ha megvan a pénz rá
+            AbleToBuild.RemoveAt(change.value);
+            dropdown.ClearOptions();
+            dropdown.AddOptions(AbleToBuild);
+            dropdown.value = 0;
         }
-
-
-        //string temp_base_name = AbleToBuild[change.value];
-        //AbleToBuild.Remove(temp_base_name);
-        //dropdown.ClearOptions();
-        //dropdown.AddOptions(AbleToBuild);
-    }
-
-    public void OnClick()
-    {
-    
-    }
-
-    public void ShowBuiltBuilings()
-    {
-        
-    
     }
 
 

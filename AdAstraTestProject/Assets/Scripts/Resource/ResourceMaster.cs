@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ResourceMaster : MonoBehaviour
@@ -81,19 +82,22 @@ public class ResourceMaster : MonoBehaviour
 
 
 
+    public TextMeshProUGUI UniEuros;
+    public TextMeshProUGUI Influence;
+    public TextMeshProUGUI Tech;
+
     void Start()
     {
-
+        
     }
+
+
 
     private void OnGUI()
     {
-        GUI.backgroundColor = Color.cyan;
-        GUI.Label(new Rect((Screen.width)-100, Screen.height-90, 300, 50),"UniEuros:" + resourceMaster.UniEuros.ToString());
-        GUI.Label(new Rect((Screen.width) - 100, Screen.height - 70, 300, 50), "Influence:" + resourceMaster.Influence.ToString());
-        GUI.Label(new Rect((Screen.width) - 100, Screen.height - 50, 300, 50), "Tech:" + resourceMaster.Tech.ToString());
-
-
+        UniEuros.text = resourceMaster.UniEuros.ToString();
+        Influence.text = resourceMaster.Influence.ToString();
+        Tech.text = resourceMaster.Tech.ToString();
     }
 
 

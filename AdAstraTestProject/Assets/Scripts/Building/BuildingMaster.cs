@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Device;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
+
 using Screen = UnityEngine.Screen;
 
 public class BuildingMaster : MonoBehaviour
@@ -150,14 +150,20 @@ public class BuildingMaster : MonoBehaviour
         }
         else
         {
-
-            //switchCasemaybe
-
             //ha megvan a pénz rá
-            AbleToBuild.RemoveAt(change.value);
-            dropdown.ClearOptions();
-            dropdown.AddOptions(AbleToBuild);
-            dropdown.value = 0;
+            if (enoughResource_UE_TECH(200,50))
+            {
+                BuiltGroundBuildings.Add(AbleToBuild[change.value]);
+                AbleToBuild.RemoveAt(change.value);
+                dropdown.ClearOptions();
+                dropdown.AddOptions(AbleToBuild);
+                dropdown.value = 0;
+                Debug.Log("gb: " + BuiltGroundBuildings.Count);
+            }
+            else
+            {
+                Debug.Log("Not enough UE_TECH");
+            }
         }
     }
 

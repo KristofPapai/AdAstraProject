@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - BuildingMaster
     - CameraMoveOnClick
     - ColorSettings
     - LookAtTarget
@@ -16,6 +17,7 @@ ScriptsOnlyBuild:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
     - TMPro.TMP_ColorGradient
+    - TMPro.TMP_Dropdown
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
     - TMPro.TMP_SpriteAsset
@@ -30,8 +32,14 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Scrollbar
+    - UnityEngine.UI.Toggle
+    - UnityEngine.UI.VerticalLayoutGroup
   serializedClasses:
     Assembly-CSharp:
     - NoiseSettings
@@ -43,6 +51,9 @@ ScriptsOnlyBuild:
     - TMPro.FontAssetCreationSettings
     - TMPro.KerningTable
     - TMPro.TMP_Character
+    - TMPro.TMP_Dropdown/DropdownEvent
+    - TMPro.TMP_Dropdown/OptionData
+    - TMPro.TMP_Dropdown/OptionDataList
     - TMPro.TMP_FontFeatureTable
     - TMPro.TMP_FontWeightPair
     - TMPro.TMP_GlyphAdjustmentRecord
@@ -54,9 +65,8 @@ ScriptsOnlyBuild:
     - TMPro.TMP_Style
     - TMPro.VertexGradient
     UnityEngine.CoreModule:
-    - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
-    - UnityEngine.Events.PersistentListenerMode
+    - UnityEngine.RectOffset
     UnityEngine.TextCoreFontEngineModule:
     - UnityEngine.TextCore.FaceInfo
     - UnityEngine.TextCore.Glyph
@@ -68,11 +78,11 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.ColorBlock
     - UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
     - UnityEngine.UI.Navigation
+    - UnityEngine.UI.ScrollRect/ScrollRectEvent
+    - UnityEngine.UI.Scrollbar/ScrollEvent
     - UnityEngine.UI.SpriteState
-  methodsToPreserve:
-  - assembly: Assembly-CSharp
-    fullTypeName: RestartGame
-    methodName: Restart
+    - UnityEngine.UI.Toggle/ToggleEvent
+  methodsToPreserve: []
   sceneClasses:
     Assets/Scenes/SampleScene.unity:
     - Class: 1
@@ -112,49 +122,65 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1708}
     - Class: 114
-      Script: {instanceID: 2294}
+      Script: {instanceID: 1972}
     - Class: 114
-      Script: {instanceID: 2334}
+      Script: {instanceID: 2296}
     - Class: 114
-      Script: {instanceID: 2362}
+      Script: {instanceID: 2336}
     - Class: 114
-      Script: {instanceID: 2384}
+      Script: {instanceID: 2364}
     - Class: 114
-      Script: {instanceID: 2820}
+      Script: {instanceID: 2386}
     - Class: 114
-      Script: {instanceID: 3050}
+      Script: {instanceID: 2822}
     - Class: 114
-      Script: {instanceID: 3266}
+      Script: {instanceID: 2834}
     - Class: 114
-      Script: {instanceID: 3356}
+      Script: {instanceID: 3052}
     - Class: 114
-      Script: {instanceID: 4326}
+      Script: {instanceID: 3268}
     - Class: 114
-      Script: {instanceID: 4376}
+      Script: {instanceID: 3358}
     - Class: 114
-      Script: {instanceID: 4440}
+      Script: {instanceID: 3544}
     - Class: 114
-      Script: {instanceID: 4702}
+      Script: {instanceID: 4192}
     - Class: 114
-      Script: {instanceID: 4714}
+      Script: {instanceID: 4328}
     - Class: 114
-      Script: {instanceID: 4966}
+      Script: {instanceID: 4378}
     - Class: 114
-      Script: {instanceID: 5502}
+      Script: {instanceID: 4394}
     - Class: 114
-      Script: {instanceID: 6122}
+      Script: {instanceID: 4444}
     - Class: 114
-      Script: {instanceID: 6276}
+      Script: {instanceID: 4706}
     - Class: 114
-      Script: {instanceID: 6622}
+      Script: {instanceID: 4718}
     - Class: 114
-      Script: {instanceID: 7032}
+      Script: {instanceID: 4970}
     - Class: 114
-      Script: {instanceID: 7786}
+      Script: {instanceID: 5354}
     - Class: 114
-      Script: {instanceID: 27944}
+      Script: {instanceID: 5506}
     - Class: 114
-      Script: {instanceID: 31752}
+      Script: {instanceID: 6128}
+    - Class: 114
+      Script: {instanceID: 6282}
+    - Class: 114
+      Script: {instanceID: 6298}
+    - Class: 114
+      Script: {instanceID: 6630}
+    - Class: 114
+      Script: {instanceID: 6642}
+    - Class: 114
+      Script: {instanceID: 7040}
+    - Class: 114
+      Script: {instanceID: 7076}
+    - Class: 114
+      Script: {instanceID: 7768}
+    - Class: 114
+      Script: {instanceID: 7794}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -232,6 +258,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnCollisionStayMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 9fbc75fc2fc75451a65f24bb7f6321b4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BuildingMaster
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -612,7 +644,7 @@ ScriptsOnlyBuild:
     className: VariablesSaver
   - hash:
       serializedVersion: 2
-      Hash: 3aafc226131246e1c71f7e6f32662f99
+      Hash: 3b433e2d6a5e4855df8c22b4cae17d8b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraMoveOnClick
@@ -622,6 +654,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: PhysicsRaycaster
+  - hash:
+      serializedVersion: 2
+      Hash: ef60a0e434afa7cfa03e1c5eb0335569
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlanetProperties
   - hash:
       serializedVersion: 2
       Hash: 0fb27be807aa299702f28ad0bcad1f46
@@ -864,6 +902,12 @@ ScriptsOnlyBuild:
     className: Text
   - hash:
       serializedVersion: 2
+      Hash: 4aaef6f0799422e4ce64fdc1c8b415ba
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DinamicUI
+  - hash:
+      serializedVersion: 2
       Hash: 2574ac7d50617d23cdefe4ad22f5e1ad
     assemblyName: Unity.VisualScripting.State.dll
     namespaceName: Unity.VisualScripting
@@ -904,6 +948,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextMeshProUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: e8e3b1031a7b78b9608c2d313e58de29
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ResourceMaster
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1216,19 +1266,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: acc63cc0a98e3b3c37992a1fa99e4782
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ResourceMaster
-  - hash:
-      serializedVersion: 2
-      Hash: d4b73a7ddd1eea2231c55cf299b8d7c4
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlanetProperties
   platform: 19
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: C:/Users/Kristof/Desktop/AdAStraGen/AdAstraTestProject.exe
+  playerPath: C:/Users/Kristof/Desktop/AdAstraBuild/AdAstraTestProject.exe

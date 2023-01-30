@@ -12,7 +12,7 @@ public class PlanetProperties : MonoBehaviour
     public bool IsMotherPlanet = false;
 
     List<string> RareMaterials = new List<string>() { "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium" }; // "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium"
-    List<string> PlanetRareMaterials = new List<string>();
+    public List<string> PlanetRareMaterials = new List<string>();
 
 
     public GameObject FloatingTextPrefab;

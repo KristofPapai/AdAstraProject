@@ -14,22 +14,12 @@ public class CameraMoveOnClick : MonoBehaviour
     GameObject selected;
     public float speed = 100.0f;
     private bool moveToCelestial = false;
-    private bool chaseCam = false;
-    private bool reset = false;
-
-
-    private bool camResetMode = false;
-    private bool GUIControl = false;
-    private bool startCam = true;
-
-    private Vector3 scrollViewVector = Vector3.zero;
     public Rect dropDownRect = new Rect(125, 50, 125, 300);
-
     public TMP_Dropdown dropdown;
-   
+    public bool chaseCam = false;
+    public GameObject CelestialPropPanel;
 
-    int indexNumber;
-    bool show = false;
+
 
 
     public void CameraReset()
@@ -39,67 +29,35 @@ public class CameraMoveOnClick : MonoBehaviour
     
     public void CameraControll()
     {
-        if (Input.GetMouseButtonDown(0))
+
+        if(Input.GetMouseButtonDown(0))
         {
-            camResetMode = false;
-            GUIControl = false;
-            startCam = false;
-            moveToCelestial = true;
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.SphereCast(ray,30, out hit, 10000f) && !EventSystem.current.IsPointerOverGameObject())
+            if (Physics.SphereCast(ray, 30, out hit, 10000f) && !EventSystem.current.IsPointerOverGameObject())
             {
                 if (hit.transform.tag == "Celestial" && selected != hit.transform.gameObject && hit.transform.gameObject.layer != 4)
                 {
                     selected = hit.transform.gameObject;
-                    Debug.Log("Celestial Hit");
-                    moveToCelestial = true;
-                    chaseCam = false;
                     List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
-
                     PopulateDropdown(dropdown, availablebuildings);
+                    SideGuiMaster(selected);
+                    moveToCelestial = true;
+                    CelestialPropPanel.SetActive(true);
                 }
             }
         }
         if (moveToCelestial)
         {
-            var targetRotation = Quaternion.LookRotation(selected.transform.position - transform.position);
-            var step = speed * Time.deltaTime;
-            float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
-            if (distance != 0)
-            {
-                mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
-                //Debug.Log("shake");
-            }
-            else
-            {
-                chaseCam = true;
-
-            }
-            if (chaseCam)
-            {
-                mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
-                for (var i = ScrollBuilding.transform.childCount - 1; i >= 0; i--)
-                {
-                    Object.Destroy(ScrollBuilding.transform.GetChild(i).gameObject);
-                }
-                
-
-            }
-        }
-        else
-        {
-            GUIControl = true;
+            mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
         }
         if (Input.GetKey("r"))
         {
             CameraReset();
             moveToCelestial = false;
-            camResetMode = true;
-            GUIControl = true;
+            CelestialPropPanel.SetActive(false);
+
         }
-
-
     }
 
 
@@ -111,9 +69,8 @@ public class CameraMoveOnClick : MonoBehaviour
 
     void Start()
     {
+        CelestialPropPanel.SetActive(false);
         cameraStartPos = mainCamera.transform.position;
-
-
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
         float buttonStack = 15;
         float h = canvas.GetComponent<RectTransform>().rect.height;
@@ -123,8 +80,6 @@ public class CameraMoveOnClick : MonoBehaviour
             GameObject button = Instantiate(buttonPrefab);
             button.transform.SetParent(verticalLayout.transform);
             button.transform.localPosition = new Vector3((-60)-(w/3), (h/2) - buttonStack, 0);
-
-            //buttonStack += 30;
             button.transform.localScale = new Vector3(1f,1f,1f);
             button.transform.rotation = canvas.transform.rotation;
             button.GetComponent<Button>().onClick.AddListener(OnClick);
@@ -138,33 +93,18 @@ public class CameraMoveOnClick : MonoBehaviour
     {
         string PlanetName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
         selected = GameObject.Find(PlanetName);
-
         List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
-        
-
         PopulateDropdown(dropdown,availablebuildings);
-
-
-
-
-        float distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
-        var step = speed * Time.deltaTime;
-        mainCamera.transform.position = Vector3.MoveTowards(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40), step);
-        distance = Vector3.Distance(mainCamera.transform.position, new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40));
-
-        if (distance < 10)
-        {
-            camResetMode = true;
-            mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
-            this.gameObject.transform.LookAt(GameObject.Find("Cam").transform);
-        }
+        mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
+        moveToCelestial = true;
+        CelestialPropPanel.SetActive(true);
+        SideGuiMaster(selected);
     }
 
     void PopulateDropdown(TMP_Dropdown dropdown, List<string> options)
     {
         dropdown.ClearOptions();
         dropdown.AddOptions(options);
-
     }
 
     void Update()
@@ -173,4 +113,23 @@ public class CameraMoveOnClick : MonoBehaviour
     }
 
 
+    //Gameobjects for sidepanel
+    public TMP_Text TextPlanetName;
+    public TMP_Text ListPlanetMaterials;
+    public TMP_Text TextOperationLevel;
+    public TMP_Text TextLocalStockPile;
+    public TMP_Text ListLocalStockPile;
+
+    void SideGuiMaster(GameObject Selected)
+    {
+        //Debug.Log(Selected.transform.name);
+        TextPlanetName.text = Selected.transform.name;
+        List<string> selectedRareMaterials = Selected.GetComponent<PlanetProperties>().PlanetRareMaterials;
+        string builder = "";
+        foreach (string material in selectedRareMaterials)
+        {
+            builder += material + "\n";
+        }
+        ListPlanetMaterials.text = builder.ToUpper();
+    }
 }

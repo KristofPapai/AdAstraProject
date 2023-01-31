@@ -130,6 +130,6 @@ public class CameraMoveOnClick : MonoBehaviour
         {
             builder += material + "\n";
         }
-        ListPlanetMaterials.text = builder.ToUpper();
+        ListPlanetMaterials.text = builder.ToLower();
     }
 }

@@ -86,9 +86,9 @@ public class BuildingMaster : MonoBehaviour
                 Debug.Log("Built FOB");
                 Debug.Log(AbleToBuild.Count);
                 GenerateMIT(20,0,5);
-                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "CURRENT OPERATION\n/// OPERATION LVL I.";
-                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "UNIEUROS /// 3000";
-                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "UNIEUROS /// 200";
+                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "current operation\n/// operation lvl I.";
+                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// 3000";
+                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "tech /// 200";
                 ListenerCall();
                 
             }
@@ -108,9 +108,9 @@ public class BuildingMaster : MonoBehaviour
                 dropdown.ClearOptions();
                 dropdown.AddOptions(AbleToBuild);
                 GenerateMIT(120, 50, 10);
-                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "CURRENT OPERATION\n/// OPERATION LVL II.";
-                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "UNIEUROS /// 5000";
-                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "UNIEUROS /// 300";
+                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "current operation\n/// operation lvl II.";
+                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// 5000";
+                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "tech /// 300";
                 ListenerCall();
             }
         }
@@ -125,10 +125,10 @@ public class BuildingMaster : MonoBehaviour
                 dropdown.ClearOptions();
                 dropdown.AddOptions(AbleToBuild);
                 GenerateMIT(200, 150, 20);
-                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "CURRENT OPERATION\n/// OPERATION LVL III.";
-                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "UNIEUROS /// NONE";
-                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "UNIEUROS /// NONE";
-                GameObject.Find("TextMainButton").GetComponent<TMP_Text>().text = "MAX OPERATION LVL";
+                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "current operation\n/// operation lvl III.";
+                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// none";
+                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "tech /// none";
+                GameObject.Find("TextMainButton").GetComponent<TMP_Text>().text = "max operation lvl";
                 ListenerCall();
             }
             

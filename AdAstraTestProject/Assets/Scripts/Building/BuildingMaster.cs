@@ -23,7 +23,7 @@ public class BuildingMaster : MonoBehaviour
     public List<string> lvl3Buildings = new List<string>() { "Core Mining", "Starport", "BioDome" }; //shipping routes and cargo ports
 
     public List<string> AbleToBuild = new List<string>();
-
+    private GameObject reasurceMasterScript;
     public List<string> BuiltUpgradeBuildings = new List<string>();
     public List<string> BuiltGroundBuildings = new List<string>();
 
@@ -36,6 +36,7 @@ public class BuildingMaster : MonoBehaviour
     void Start()
     {
         dropdown = GameObject.Find("BuildingsDropDown").GetComponent<TMP_Dropdown>();
+        reasurceMasterScript = GameObject.Find("ScriptMaster");
 
 
     }
@@ -47,18 +48,18 @@ public class BuildingMaster : MonoBehaviour
     public void OnGUI()
     {
 
-        canvas = GameObject.FindGameObjectWithTag("HUD");
-        if (Vector3.Distance(GameObject.Find("Cam").transform.position, this.transform.position) < 70)
-        {
+        //canvas = GameObject.FindGameObjectWithTag("HUD");
+        //if (Vector3.Distance(GameObject.Find("Cam").transform.position, this.transform.position) < 70)
+        //{
             
-            if (this.gameObject.GetComponent<PlanetProperties>().IsMotherPlanet == false)
-            {
-                BuildingBuilder();
+        //    if (this.gameObject.GetComponent<PlanetProperties>().IsMotherPlanet == false)
+        //    {
+        //        BuildingBuilder();
 
 
-            }
+        //    }
         
-        }
+        //}
     }
 
 
@@ -74,64 +75,63 @@ public class BuildingMaster : MonoBehaviour
     {
         if (BuiltUpgradeBuildings.Count == 0)
         {
-            if (GUI.Button(new Rect(((Screen.width / 2) + 100), (Screen.height / 2) - 100, 300, 25), "Upgrade to TECH I"))
+
+            if (enoughResource_UE_TECH(1000,100))
             {
+                BuiltUpgradeBuildings.Add("FOB");
+                UpgradeBuildings.Remove("FOB");
+                AbleToBuild.AddRange(lvl1Buildings);
+                dropdown.ClearOptions();
+                dropdown.AddOptions(AbleToBuild);
+                Debug.Log("Built FOB");
+                Debug.Log(AbleToBuild.Count);
+                GenerateMIT(20,0,5);
+                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "CURRENT OPERATION\n/// OPERATION LVL I.";
+                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "UNIEUROS /// 3000";
+                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "UNIEUROS /// 200";
+                ListenerCall();
                 
-                if (enoughResource_UE_TECH(1000,100))
-                {
-                    BuiltUpgradeBuildings.Add("FOB");
-                    UpgradeBuildings.Remove("FOB");
-                    AbleToBuild.AddRange(lvl1Buildings);
-                    dropdown.ClearOptions();
-                    dropdown.AddOptions(AbleToBuild);
-                    Debug.Log("Built FOB");
-                    Debug.Log(AbleToBuild.Count);
-                    GenerateMIT(20,0,5);
-                    ListenerCall();
-                    
-                }
-                else
-                {
-                    //not enough resource
-                }
+            }
+            else
+            {
 
             }
         }
         else if (BuiltUpgradeBuildings.Contains("FOB") && BuiltUpgradeBuildings.Count == 1)
         {
-            if (GUI.Button(new Rect(((Screen.width / 2) + 100), (Screen.height / 2) - 100, 300, 25), "Upgrade to TECH II"))
+            if (enoughResource_UE_TECH(3000, 200))
             {
-                if (enoughResource_UE_TECH(3000, 200))
-                {
-                    BuiltUpgradeBuildings.Add("Outpost");
-                    UpgradeBuildings.Remove("FOB");
-                    Debug.Log("Built Outpost");
-                    AbleToBuild.AddRange(lvl2Buildings);
-                    dropdown.ClearOptions();
-                    dropdown.AddOptions(AbleToBuild);
-                    GenerateMIT(120, 50, 10);
-                    ListenerCall();
-                }
+                BuiltUpgradeBuildings.Add("Outpost");
+                UpgradeBuildings.Remove("FOB");
+                Debug.Log("Built Outpost");
+                AbleToBuild.AddRange(lvl2Buildings);
+                dropdown.ClearOptions();
+                dropdown.AddOptions(AbleToBuild);
+                GenerateMIT(120, 50, 10);
+                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "CURRENT OPERATION\n/// OPERATION LVL II.";
+                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "UNIEUROS /// 5000";
+                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "UNIEUROS /// 300";
+                ListenerCall();
             }
         }
         else if (BuiltUpgradeBuildings.Contains("Outpost") && BuiltUpgradeBuildings.Contains("FOB") && BuiltUpgradeBuildings.Count == 2)
         {
-            if (GUI.Button(new Rect(((Screen.width / 2) + 100), (Screen.height / 2) - 100, 300, 25), "Upgrade to TECH III"))
+
+            if (enoughResource_UE_TECH(5000, 300))
             {
-                if (enoughResource_UE_TECH(5000, 300))
-                {
-                    BuiltUpgradeBuildings.Add("Permament Base Facility");
-                    Debug.Log("Built Permament Base Facility");
-                    AbleToBuild.AddRange(lvl3Buildings);
-                    dropdown.ClearOptions();
-                    dropdown.AddOptions(AbleToBuild);
-                    GenerateMIT(200, 150, 20);
-                    ListenerCall();
-
-
-                }
-
+                BuiltUpgradeBuildings.Add("Permament Base Facility");
+                Debug.Log("Built Permament Base Facility");
+                AbleToBuild.AddRange(lvl3Buildings);
+                dropdown.ClearOptions();
+                dropdown.AddOptions(AbleToBuild);
+                GenerateMIT(200, 150, 20);
+                GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "CURRENT OPERATION\n/// OPERATION LVL III.";
+                GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "UNIEUROS /// NONE";
+                GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "UNIEUROS /// NONE";
+                GameObject.Find("TextMainButton").GetComponent<TMP_Text>().text = "MAX OPERATION LVL";
+                ListenerCall();
             }
+            
         }
         else if (BuiltUpgradeBuildings.Contains("Permament Base Facility"))
         {
@@ -178,9 +178,8 @@ public class BuildingMaster : MonoBehaviour
 
     public bool enoughResource_UE_TECH(double UE, double Tech)
     {
-        GameObject reasurceMasterScript = GameObject.Find("ScriptMaster");
-        double currentUE = reasurceMasterScript.GetComponent<ResourceMaster>().OutUniEuros;
-        double currentTech = reasurceMasterScript.GetComponent<ResourceMaster>().OutTech;
+        double currentUE = double.Parse(reasurceMasterScript.GetComponent<ResourceMaster>().UniEuros.text);
+        double currentTech = double.Parse(reasurceMasterScript.GetComponent<ResourceMaster>().Tech.text);
         if (currentUE - UE >= 0 && currentTech - Tech >= 0)
         {
             reasurceMasterScript.GetComponent<ResourceMaster>().AddUniEuros(-UE);

@@ -27,6 +27,7 @@ public class ResourceMaster : MonoBehaviour
             UniEuros = uniEuros;
             Influence = influence;
             Tech = tech;
+            Debug.Log("money");
         }
 
 
@@ -72,7 +73,7 @@ public class ResourceMaster : MonoBehaviour
             }
         }
     }
-
+    
     Resources resourceMaster = new Resources(30000,30000,30000);
     public Camera mainCamera;
 

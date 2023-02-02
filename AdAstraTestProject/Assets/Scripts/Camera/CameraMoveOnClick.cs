@@ -125,6 +125,7 @@ public class CameraMoveOnClick : MonoBehaviour
         //Debug.Log(Selected.transform.name);
         TextPlanetName.text = Selected.transform.name;
         List<string> selectedRareMaterials = Selected.GetComponent<PlanetProperties>().PlanetRareMaterials;
+        selected.GetComponent<BuildingMaster>().clickToPlanet();
         string builder = "";
         foreach (string material in selectedRareMaterials)
         {

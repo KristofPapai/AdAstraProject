@@ -25,15 +25,9 @@ public class BuildingMaster : MonoBehaviour
     public GameObject popup;
     public bool upgraded = false;
 
-    //public GameObject buttonPrefab;
-    //public GameObject canvas;
-    //public GameObject panlePrefab;
-
-    public TMP_Dropdown dropdown;
 
     void Start()
     {
-        dropdown = GameObject.Find("BuildingsDropDown").GetComponent<TMP_Dropdown>();
         reasurceMasterScript = GameObject.Find("ScriptMaster");
         popup = GameObject.Find("PopUpBuilding");
 
@@ -45,12 +39,7 @@ public class BuildingMaster : MonoBehaviour
 
 
 
-    void ListenerCall()
-    {
-        dropdown.onValueChanged.AddListener(delegate {
-            DropdownValueChanged(dropdown, AbleToBuild);
-        });
-    }
+
 
 
     public void BuildingBuilder()
@@ -62,8 +51,7 @@ public class BuildingMaster : MonoBehaviour
                 BuiltUpgradeBuildings.Add("FOB");
                 UpgradeBuildings.Remove("FOB");
                 AbleToBuild.AddRange(lvl1Buildings);
-                dropdown.ClearOptions();
-                dropdown.AddOptions(AbleToBuild);
+
                 Debug.Log("Built FOB");
                 Debug.Log(AbleToBuild.Count);
                 GenerateMIT(20,0,5);
@@ -75,7 +63,6 @@ public class BuildingMaster : MonoBehaviour
                 GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "current operation\n/// operation lvl I.";
                 GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// 3000";
                 GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "tech /// 200";
-                ListenerCall();
             }
             else
             {
@@ -91,8 +78,7 @@ public class BuildingMaster : MonoBehaviour
                 UpgradeBuildings.Remove("FOB");
                 Debug.Log("Built Outpost");
                 AbleToBuild.AddRange(lvl2Buildings);
-                dropdown.ClearOptions();
-                dropdown.AddOptions(AbleToBuild);
+
                 GenerateMIT(120, 50, 10);
                 textSaveing[0] = "current operation\n/// operation lvl II.";
                 textSaveing[1] = "unieuros /// 5000";
@@ -100,7 +86,6 @@ public class BuildingMaster : MonoBehaviour
                 GameObject.Find("OutCurrentOperationLevel").GetComponent<TMP_Text>().text = "current operation\n/// operation lvl II.";
                 GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// 5000";
                 GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "tech /// 300";
-                ListenerCall();
             }
         }
         else if (BuiltUpgradeBuildings.Contains("Outpost") && BuiltUpgradeBuildings.Contains("FOB") && BuiltUpgradeBuildings.Count == 2)
@@ -111,8 +96,7 @@ public class BuildingMaster : MonoBehaviour
                 BuiltUpgradeBuildings.Add("Permament Base Facility");
                 Debug.Log("Built Permament Base Facility");
                 AbleToBuild.AddRange(lvl3Buildings);
-                dropdown.ClearOptions();
-                dropdown.AddOptions(AbleToBuild);
+
                 GenerateMIT(200, 150, 20);
                 textSaveing[0] = "current operation\n/// operation lvl III.";
                 textSaveing[1] = "unieuros /// none";
@@ -122,7 +106,6 @@ public class BuildingMaster : MonoBehaviour
                 GameObject.Find("TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// none";
                 GameObject.Find("TextReqTech").GetComponent<TMP_Text>().text = "tech /// none";
                 GameObject.Find("TextMainButton").GetComponent<TMP_Text>().text = "max operation lvl";
-                ListenerCall();
             }
             
         }
@@ -134,31 +117,7 @@ public class BuildingMaster : MonoBehaviour
     }
 
 
-    void DropdownValueChanged(TMP_Dropdown change,List<string> temp)
-    {
-        Debug.Log(temp.Count);
-        if (AbleToBuild[change.value] == "")
-        {
-            Debug.Log("Empty Selection");
-        }
-        else
-        {
-            //ha megvan a pénz rá
-            if (enoughResource_UE_TECH(200,50))
-            {
-                BuiltGroundBuildings.Add(AbleToBuild[change.value]);
-                AbleToBuild.RemoveAt(change.value);
-                dropdown.ClearOptions();
-                dropdown.AddOptions(AbleToBuild);
-                dropdown.value = 0;
-                Debug.Log("gb: " + BuiltGroundBuildings.Count);
-            }
-            else
-            {
-                Debug.Log("Not enough UE_TECH");
-            }
-        }
-    }
+
 
 
     public void GenerateMIT(double UE,double Influence,double Tech)

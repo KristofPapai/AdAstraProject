@@ -29,6 +29,7 @@ public class ShowBuildingPopup : MonoBehaviour
 
     public void refresh()
     {
+        killchildren();
         PopUp.SetActive(true);
         string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
         GameObject currentPlanet = GameObject.Find(currentPlanetName);
@@ -44,6 +45,14 @@ public class ShowBuildingPopup : MonoBehaviour
             GameObject.Find(building + "/TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// " + splitted[1];
             GameObject.Find(building + "/TextReqTech").GetComponent<TMP_Text>().text = "tecH /// " + splitted[2];
 
+        }
+    }
+
+    public void killchildren()
+    {
+        while (verticalLayout.transform.childCount > 0)
+        {
+            DestroyImmediate(verticalLayout.transform.GetChild(0).gameObject);
         }
     }
    

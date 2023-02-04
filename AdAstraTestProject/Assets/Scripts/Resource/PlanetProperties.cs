@@ -52,30 +52,4 @@ public class PlanetProperties : MonoBehaviour
         //MaterialListing();
     }
 
-
-    public void OnGUI()
-    {
-        if (this.gameObject.GetComponent<PlanetProperties>().IsMotherPlanet == false)
-        {
-            MaterialListing();
-        }
-    }
-
-    public void MaterialListing()
-    {
-
-
-        if (Vector3.Distance(GameObject.Find("Cam").transform.position, this.transform.position) < 70)
-        {
-            GUI.backgroundColor = Color.red;
-            string builder = "";
-            foreach (string material in PlanetRareMaterials)
-            {
-                builder += material + "\n";
-            }
-
-            GUI.Label(new Rect(((Screen.width)/2) - 300, (Screen.height/2) - 100, 300, 300), builder);
-        }
-        
-    }
 }

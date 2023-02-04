@@ -40,7 +40,6 @@ public class CameraMoveOnClick : MonoBehaviour
                 {
                     selected = hit.transform.gameObject;
                     List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
-                    PopulateDropdown(dropdown, availablebuildings);
                     SideGuiMaster(selected);
                     moveToCelestial = true;
                     CelestialPropPanel.SetActive(true);
@@ -94,18 +93,12 @@ public class CameraMoveOnClick : MonoBehaviour
         string PlanetName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
         selected = GameObject.Find(PlanetName);
         List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
-        PopulateDropdown(dropdown,availablebuildings);
         mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
         moveToCelestial = true;
         CelestialPropPanel.SetActive(true);
         SideGuiMaster(selected);
     }
 
-    void PopulateDropdown(TMP_Dropdown dropdown, List<string> options)
-    {
-        dropdown.ClearOptions();
-        dropdown.AddOptions(options);
-    }
 
     void Update()
     {
@@ -122,6 +115,7 @@ public class CameraMoveOnClick : MonoBehaviour
     public GameObject popup;
     void SideGuiMaster(GameObject Selected)
     {
+        GameObject.Find("AvailableOpBuildings").GetComponent<ShowBuildingPopup>().killchildren();
         if (popup.active)
         {
             popup.SetActive(false);

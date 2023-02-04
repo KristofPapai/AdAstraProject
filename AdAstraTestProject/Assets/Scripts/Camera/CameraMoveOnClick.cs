@@ -119,10 +119,13 @@ public class CameraMoveOnClick : MonoBehaviour
     public TMP_Text TextOperationLevel;
     public TMP_Text TextLocalStockPile;
     public TMP_Text ListLocalStockPile;
-
+    public GameObject popup;
     void SideGuiMaster(GameObject Selected)
     {
-        //Debug.Log(Selected.transform.name);
+        if (popup.active)
+        {
+            popup.SetActive(false);
+        }
         TextPlanetName.text = Selected.transform.name;
         List<string> selectedRareMaterials = Selected.GetComponent<PlanetProperties>().PlanetRareMaterials;
         selected.GetComponent<BuildingMaster>().clickToPlanet();

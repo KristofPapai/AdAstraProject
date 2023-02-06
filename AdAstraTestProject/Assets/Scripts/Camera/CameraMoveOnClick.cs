@@ -129,5 +129,23 @@ public class CameraMoveOnClick : MonoBehaviour
             builder += material + "\n";
         }
         ListPlanetMaterials.text = builder.ToLower();
+        if (selected.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Warehouses,500,500,0,0"))
+        {
+            stockpileListing(selected);
+        }
+        else
+        {
+            ListLocalStockPile.text = "///none///";
+
+        }
+    }
+
+    public void stockpileListing(GameObject selected) 
+    {
+        ListLocalStockPile.text = "";
+        foreach (var item in selected.GetComponent<BuildingMaster>().stockpile)
+        {
+            ListLocalStockPile.text += item.Key + " = " + item.Value + "\n";
+        }
     }
 }

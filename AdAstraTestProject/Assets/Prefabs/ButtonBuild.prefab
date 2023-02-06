@@ -554,3 +554,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e483508bebd1264aac8a522ec30fa3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  queueVerticalLayout: {fileID: 0}
+  queueItemPrefab: {fileID: 2408611249327742957, guid: 7c12129ad0e3201458fbb7ede35246ee, type: 3}

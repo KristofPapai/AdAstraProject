@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ResourceMaster : MonoBehaviour
@@ -27,7 +28,6 @@ public class ResourceMaster : MonoBehaviour
             UniEuros = uniEuros;
             Influence = influence;
             Tech = tech;
-            Debug.Log("money");
         }
 
 
@@ -99,6 +99,7 @@ public class ResourceMaster : MonoBehaviour
         UniEuros.text = resourceMaster.UniEuros.ToString();
         Influence.text = resourceMaster.Influence.ToString();
         Tech.text = resourceMaster.Tech.ToString();
+        
     }
 
 
@@ -106,12 +107,25 @@ public class ResourceMaster : MonoBehaviour
     public double OutInfluence = 0;
     public double OutTech = 0;
 
+    
+    
+    
+
+
+    public TextMeshProUGUI genuni;
+    public TextMeshProUGUI gentech;
+    public TextMeshProUGUI geninf;
+
 
     void Update()
     {
         _timer += Time.deltaTime;
         if (_timer >= _duration)
         {
+            double generatedunieuros = 0;
+            double generatedtech = 0;
+            double generatedinfluence = 0;
+
             planets = GameObject.FindGameObjectsWithTag("Celestial");
             //Debug.Log(planets.Length);
             _timer = 0f;
@@ -121,6 +135,12 @@ public class ResourceMaster : MonoBehaviour
                 resourceMaster.AddUniEuros(planet.GetComponent<PlanetProperties>().GenUniEuros);
                 resourceMaster.AddInfluence(planet.GetComponent<PlanetProperties>().GenInfluence);
                 resourceMaster.AddTech(planet.GetComponent<PlanetProperties>().GenTech);
+                generatedunieuros += planet.GetComponent<PlanetProperties>().GenUniEuros;
+                generatedtech += planet.GetComponent<PlanetProperties>().GenTech;
+                generatedinfluence += planet.GetComponent<PlanetProperties>().GenInfluence;
+                genuni.text = "+"+generatedunieuros;
+                gentech.text = "+" + generatedtech;
+                geninf.text = "+" + generatedinfluence;
 
                 OutUniEuros = resourceMaster.UniEuros;
                 OutInfluence = resourceMaster.Influence;

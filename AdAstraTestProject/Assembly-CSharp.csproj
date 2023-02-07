@@ -60,12 +60,14 @@
     <Compile Include="Assets\Scripts\Building\OperationUpgrade.cs" />
     <Compile Include="Assets\Scripts\Building\BuildingMaster.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Scripts\Building\QueueButton.cs" />
     <Compile Include="Assets\Scripts\PorceduralPlanet\ShapeSettings.cs" />
     <Compile Include="Assets\Scripts\OrbitMaster.cs" />
     <Compile Include="Assets\Scripts\LookAtTarget.cs" />
     <Compile Include="Assets\Scripts\Building\BuildingButton.cs" />
     <Compile Include="Assets\Scripts\Building\ShowBuildingPopup.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
+    <Compile Include="Assets\Scripts\Resource\generatedMIT.cs" />
     <Compile Include="Assets\Scripts\ConditionalHideAttribute.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\PorceduralPlanet\ColorSettings.cs" />
@@ -116,8 +118,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Scripts\Resource\generatedMIT.cs" />
-    <Compile Include="Assets\Scripts\Building\QueueButton.cs" />
+    <Compile Include="Assets\Scripts\Building\BuildTimer.cs" />
+    <Compile Include="Assets\Scripts\Building\DestroyQueueItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

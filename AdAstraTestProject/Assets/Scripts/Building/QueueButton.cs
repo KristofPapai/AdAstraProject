@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class QueueButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float _duration;
+    private float _timer = 0f;
+    private void FixedUpdate()
     {
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _timer += Time.deltaTime;
+        if (_timer >= _duration)
+        {
+            _timer = 0f;
+        }
     }
 }

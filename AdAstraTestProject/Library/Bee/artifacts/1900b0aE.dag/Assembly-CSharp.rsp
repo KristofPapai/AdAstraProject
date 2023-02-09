@@ -359,6 +359,7 @@
 "Assets/Scripts/Building/OperationUpgrade.cs"
 "Assets/Scripts/Building/QueueButton.cs"
 "Assets/Scripts/Building/ShowBuildingPopup.cs"
+"Assets/Scripts/Building/StoreClassObject.cs"
 "Assets/Scripts/Camera/CameraMoveOnClick.cs"
 "Assets/Scripts/ChaseCam.cs"
 "Assets/Scripts/classes/Building.cs"

@@ -12,9 +12,9 @@ public class Building
     public double UniEurosGenerate;
     public double InfluenceGenerate;
     public double TechGenerate;
-    public double BuildingTime;
+    public float BuildingTime;
 
-    public Building(string name, int level, double uniEurosPrice, double influencePrice, double techPrice, double uniEurosGenerate, double influenceGenerate, double techGenerate, double buildingTime)
+    public Building(string name, int level, double uniEurosPrice, double influencePrice, double techPrice, double uniEurosGenerate, double influenceGenerate, double techGenerate, float buildingTime)
     {
         Name = name;
         Level = level;

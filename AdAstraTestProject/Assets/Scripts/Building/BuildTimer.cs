@@ -11,10 +11,12 @@ public class BuildTimer : MonoBehaviour
     private float _timer = 0f;
     private string currentPlanetName;
     private GameObject currentPlanet;
+    private Building curentBuildingData;
 
     private void Start()
     {
-        _duration = float.Parse(this.name.Split(',')[6]);
+        curentBuildingData = this.GetComponent<StoreClassObject>().saveBuilding;
+        _duration = curentBuildingData.BuildingTime;
         currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
         currentPlanet = GameObject.Find(currentPlanetName);
     }
@@ -26,7 +28,6 @@ public class BuildTimer : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer >= _duration)
         {
-            Debug.Log("megepült");
             _timer = 0f;
             buildBuilding();
             Destroy(this.gameObject);
@@ -36,23 +37,25 @@ public class BuildTimer : MonoBehaviour
     public void buildBuilding()
     {
 
-        string[] splitter = this.gameObject.name.Split(',');
-        double price = double.Parse(splitter[2]);
-        double techprice = double.Parse(splitter[3]);
+        //string[] splitter = this.gameObject.name.Split(',');
+        double price = curentBuildingData.UniEurosPrice;
+        double techprice = curentBuildingData.TechPrice;
         //currentPlanet.GetComponent<BuildingMaster>().enoughResource_UE_TECH(price, techprice);
         if (currentPlanet.GetComponent<BuildingMaster>().enoughResource_UE_TECH(price, techprice))
         {
-            currentPlanet.GetComponent<BuildingMaster>().AbleToBuild.Remove(this.gameObject.name);
-            currentPlanet.GetComponent<BuildingMaster>().GenerateMIT(double.Parse(splitter[4]), 0, double.Parse(splitter[5]));
-            string[] splitter2 = this.name.Split(",");
-            string toAbletoBuild = "";
-            for (int i = 1; i < splitter2.Length; i++)
-            {
-                toAbletoBuild += splitter2[i] + ",";
-            }
-            toAbletoBuild = toAbletoBuild.Substring(0, toAbletoBuild.Length - 1);
-            currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Add(toAbletoBuild);
-            if (this.name == "queue item,Warehouses,500,500,0,0,10")
+            currentPlanet.GetComponent<BuildingMaster>().classAbleToBuild.Remove(curentBuildingData);
+            currentPlanet.GetComponent<BuildingMaster>().GenerateMIT(curentBuildingData.UniEurosGenerate, curentBuildingData.InfluenceGenerate, curentBuildingData.TechGenerate);
+            //string[] splitter2 = this.name.Split(",");
+            //string toAbletoBuild = "";
+            //for (int i = 1; i < splitter2.Length; i++)
+            //{
+            //    toAbletoBuild += splitter2[i] + ",";
+            //}
+            //toAbletoBuild = toAbletoBuild.Substring(0, toAbletoBuild.Length - 1);
+            currentPlanet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Add(curentBuildingData);
+            //Debug.Log(currentPlanet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Count);
+            Debug.Log(curentBuildingData.Name);
+            if (this.name == "queue item,Warehouses")
             {
                 isStockpile();
             }

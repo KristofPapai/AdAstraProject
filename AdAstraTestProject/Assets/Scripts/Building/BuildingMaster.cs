@@ -1,6 +1,7 @@
 using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -40,16 +41,17 @@ public class BuildingMaster : MonoBehaviour
         "Rover Hangar,1,200,0,50,10,0,0,10",
         "Research Quarters,1,100,0,200,10,0,50,120",
         "Operation Deck,1,300,0,20,10,0,10,120",
-        "Apartments,2,100,0,200,0,0,200",
-        "Surface Mining,2,500,,0,500,100,0,0,10",
+        "Apartments,2,500,0,500,100,0,0,10",
+        "Surface Mining,2,500,0,500,100,0,0,10",
         "Warehouses,2,500,0,500,0,0,0,10",
-        "Core Mining,3,2500,700,0,0,300",
+        "Core Mining,3,2500,0,700,0,0,300,300",
         "Starport,3000,3,1000,0,100,100,0,300",
         "BioDome,3,1000,0,1000,30,0,30,300"
     };
 
     public List<Building> buildings = new List<Building>();
     public List<Building> classAbleToBuild = new List<Building>();
+    public List<Building> classBuiltGroundBuildings = new List<Building>();
 
 
 
@@ -69,7 +71,7 @@ public class BuildingMaster : MonoBehaviour
             tempBuilding.UniEurosGenerate = double.Parse(splitter[5]);
             tempBuilding.InfluenceGenerate = double.Parse(splitter[6]);
             tempBuilding.TechGenerate = double.Parse(splitter[7]);
-            tempBuilding.BuildingTime = double.Parse(splitter[8]);
+            tempBuilding.BuildingTime = float.Parse(splitter[8]);
             buildings.Add(tempBuilding);
         }
 
@@ -89,9 +91,14 @@ public class BuildingMaster : MonoBehaviour
                 BuiltUpgradeBuildings.Add("FOB");
                 UpgradeBuildings.Remove("FOB");
                 AbleToBuild.AddRange(lvl1Buildings);
+                foreach (Building item in buildings)
+                {
+                    if (item.Level == 1)
+                    {
+                        classAbleToBuild.Add(item);
+                    }
+                }
 
-                Debug.Log("Built FOB");
-                Debug.Log(AbleToBuild.Count);
                 GenerateMIT(20,0,5);
 
                 textSaveing[0] = "current operation\n/// operation lvl I.";
@@ -117,6 +124,14 @@ public class BuildingMaster : MonoBehaviour
                 Debug.Log("Built Outpost");
                 AbleToBuild.AddRange(lvl2Buildings);
 
+                foreach (Building item in buildings)
+                {
+                    if (item.Level == 2)
+                    {
+                        classAbleToBuild.Add(item);
+                    }
+                }
+
                 GenerateMIT(120, 50, 10);
                 textSaveing[0] = "current operation\n/// operation lvl II.";
                 textSaveing[1] = "unieuros /// 5000";
@@ -134,6 +149,15 @@ public class BuildingMaster : MonoBehaviour
                 BuiltUpgradeBuildings.Add("Permament Base Facility");
                 Debug.Log("Built Permament Base Facility");
                 AbleToBuild.AddRange(lvl3Buildings);
+
+
+                foreach (Building item in buildings)
+                {
+                    if (item.Level == 3)
+                    {
+                        classAbleToBuild.Add(item);
+                    }
+                }
 
                 GenerateMIT(200, 150, 20);
                 textSaveing[0] = "current operation\n/// operation lvl III.";
@@ -214,13 +238,23 @@ public class BuildingMaster : MonoBehaviour
 
     public void MiningOperations()
     {
-        
-
-        if (BuiltGroundBuildings.Contains("Warehouses,500,500,0,0,10") && BuiltGroundBuildings.Contains("Surface Mining,500,500,100,0,10") && haveminingOps == false)
+        if (classBuiltGroundBuildings.Any(x => (x.Name == "Warehouses")) && classBuiltGroundBuildings.Any(x => (x.Name == "Surface Mining")) && haveminingOps == false)
         {
             foreach (string item in this.GetComponent<PlanetProperties>().PlanetRareMaterials)
             {
-                this.GetComponent<BuildingMaster>().AbleToBuild.Add(item + "mine,500,50,100,0,300");
+                //this.GetComponent<BuildingMaster>().AbleToBuild.Add(item + "mine,500,50,100,0,300");
+                Building temp = new Building();
+                temp.Name = item +"-mine";
+                temp.Level = 100;
+                temp.UniEurosPrice = 500;
+                temp.InfluencePrice = 0;
+                temp.TechPrice = 50;
+                temp.UniEurosGenerate = 100;
+                temp.InfluenceGenerate = 0;
+                temp.TechGenerate = 0;
+                temp.BuildingTime = 400;
+                this.GetComponent<BuildingMaster>().classAbleToBuild.Add(temp);
+
             }
             haveminingOps = true;
         }

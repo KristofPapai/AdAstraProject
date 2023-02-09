@@ -292,4 +292,14 @@ MonoBehaviour:
   Miningbuildings: []
   popup: {fileID: 0}
   upgraded: 0
+  AllBuildings:
+  - Rover Hangar,1,200,0,50,10,0,0,10
+  - Research Quarters,1,100,0,200,10,0,50,120
+  - Operation Deck,1,300,0,20,10,0,10,120
+  - Apartments,2,500,0,500,100,0,0,10
+  - Surface Mining,2,500,0,500,100,0,0,10
+  - Warehouses,2,500,0,500,0,0,0,10
+  - Core Mining,3,2500,0,700,0,0,300,300
+  - Starport,3000,3,1000,0,100,100,0,300
+  - BioDome,3,1000,0,1000,30,0,30,300
   haveminingOps: 0

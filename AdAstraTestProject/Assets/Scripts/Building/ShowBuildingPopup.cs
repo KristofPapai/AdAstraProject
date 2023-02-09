@@ -33,19 +33,32 @@ public class ShowBuildingPopup : MonoBehaviour
         PopUp.SetActive(true);
         string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
         GameObject currentPlanet = GameObject.Find(currentPlanetName);
-        List<string> availablebuildings = currentPlanet.GetComponent<BuildingMaster>().AbleToBuild;
-        foreach (string building in availablebuildings)
+        foreach (Building item in currentPlanet.GetComponent<BuildingMaster>().classAbleToBuild)
         {
-
             GameObject button = Instantiate(buttonprefab, verticalLayout.transform);
             button.transform.SetParent(verticalLayout.transform);
-            string[] splitted = building.Split(',');
-            button.transform.name = building;
-            GameObject.Find(building + "/TextBuildingName").GetComponent<TMP_Text>().text = splitted[0];
-            GameObject.Find(building + "/TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// " + splitted[1];
-            GameObject.Find(building + "/TextReqTech").GetComponent<TMP_Text>().text = "tecH /// " + splitted[2];
-
+            button.transform.name = item.Name;
+            button.GetComponent<StoreClassObject>().saveBuilding = item;
+            GameObject.Find(item.Name + "/TextBuildingName").GetComponent<TMP_Text>().text = item.Name;
+            GameObject.Find(item.Name + "/TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// " + item.UniEurosPrice;
+            GameObject.Find(item.Name + "/TextReqTech").GetComponent<TMP_Text>().text = "tecH /// " + item.TechPrice;
         }
+
+
+
+        //List<string> availablebuildings = currentPlanet.GetComponent<BuildingMaster>().AbleToBuild;
+        //foreach (string building in availablebuildings)
+        //{
+
+        //    GameObject button = Instantiate(buttonprefab, verticalLayout.transform);
+        //    button.transform.SetParent(verticalLayout.transform);
+        //    string[] splitted = building.Split(',');
+        //    button.transform.name = building;
+        //    GameObject.Find(building + "/TextBuildingName").GetComponent<TMP_Text>().text = splitted[0];
+        //    GameObject.Find(building + "/TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// " + splitted[1];
+        //    GameObject.Find(building + "/TextReqTech").GetComponent<TMP_Text>().text = "tecH /// " + splitted[2];
+
+        //}
     }
 
     public void killchildren()

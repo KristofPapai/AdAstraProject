@@ -361,6 +361,7 @@
 "Assets/Scripts/Building/ShowBuildingPopup.cs"
 "Assets/Scripts/Camera/CameraMoveOnClick.cs"
 "Assets/Scripts/ChaseCam.cs"
+"Assets/Scripts/classes/Building.cs"
 "Assets/Scripts/ConditionalHideAttribute.cs"
 "Assets/Scripts/DinamicUI.cs"
 "Assets/Scripts/LookAtTarget.cs"

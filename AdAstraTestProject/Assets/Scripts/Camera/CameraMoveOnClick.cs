@@ -138,6 +138,7 @@ public class CameraMoveOnClick : MonoBehaviour
             ListLocalStockPile.text = "///none///";
 
         }
+
     }
 
     public void stockpileListing(GameObject selected) 

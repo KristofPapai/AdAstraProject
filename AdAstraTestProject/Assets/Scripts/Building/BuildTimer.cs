@@ -9,9 +9,14 @@ public class BuildTimer : MonoBehaviour
     
     [SerializeField] private float _duration;
     private float _timer = 0f;
+    private string currentPlanetName;
+    private GameObject currentPlanet;
+
     private void Start()
     {
         _duration = float.Parse(this.name.Split(',')[6]);
+        currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
+        currentPlanet = GameObject.Find(currentPlanetName);
     }
     private void FixedUpdate()
     {
@@ -30,8 +35,6 @@ public class BuildTimer : MonoBehaviour
 
     public void buildBuilding()
     {
-        string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
-        GameObject currentPlanet = GameObject.Find(currentPlanetName);
 
         string[] splitter = this.gameObject.name.Split(',');
         double price = double.Parse(splitter[2]);
@@ -40,9 +43,16 @@ public class BuildTimer : MonoBehaviour
         if (currentPlanet.GetComponent<BuildingMaster>().enoughResource_UE_TECH(price, techprice))
         {
             currentPlanet.GetComponent<BuildingMaster>().AbleToBuild.Remove(this.gameObject.name);
-            currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Add(this.name);
             currentPlanet.GetComponent<BuildingMaster>().GenerateMIT(double.Parse(splitter[4]), 0, double.Parse(splitter[5]));
-            if (this.name == "Warehouses,500,500,0,0")
+            string[] splitter2 = this.name.Split(",");
+            string toAbletoBuild = "";
+            for (int i = 1; i < splitter2.Length; i++)
+            {
+                toAbletoBuild += splitter2[i] + ",";
+            }
+            toAbletoBuild = toAbletoBuild.Substring(0, toAbletoBuild.Length - 1);
+            currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Add(toAbletoBuild);
+            if (this.name == "queue item,Warehouses,500,500,0,0,10")
             {
                 isStockpile();
             }
@@ -56,14 +66,14 @@ public class BuildTimer : MonoBehaviour
 
     public void isStockpile()
     {
-        string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
-        GameObject currentPlanet = GameObject.Find(currentPlanetName);
+
         GameObject.Find("TextStockpile").GetComponent<TMP_Text>().text = "local stockpile /// available";
         foreach (string item in currentPlanet.GetComponent<PlanetProperties>().PlanetRareMaterials)
         {
             currentPlanet.GetComponent<BuildingMaster>().stockpile.Add(item, 0);
-
         }
         GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().stockpileListing(currentPlanet);
     }
+
+
 }

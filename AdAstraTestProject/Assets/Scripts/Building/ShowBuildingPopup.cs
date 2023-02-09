@@ -55,5 +55,19 @@ public class ShowBuildingPopup : MonoBehaviour
             DestroyImmediate(verticalLayout.transform.GetChild(0).gameObject);
         }
     }
-   
+
+    public void MiningOperations()
+    {
+        string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
+        GameObject currentPlanet = GameObject.Find(currentPlanetName);
+        if (currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Warehouses,500,500,0,0") && currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Surface Mining,500,500,100,0,200"))
+        {
+            foreach (string item in currentPlanet.GetComponent<BuildingMaster>().stockpile.Keys)
+            {
+
+            }
+        }
+
+    }
+
 }

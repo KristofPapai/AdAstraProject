@@ -17,6 +17,7 @@ public class BuildingButton : MonoBehaviour
         if (currentPlanet.GetComponent<BuildingMaster>().enoughResource_UE_TECH(price, techprice))
         {
             pushToQueue();
+            currentPlanet.GetComponent<BuildingMaster>().AbleToBuild.Remove(this.name);
             Destroy(this.gameObject);
         }
         else
@@ -39,7 +40,7 @@ public class BuildingButton : MonoBehaviour
         GameObject.Find(queueitem.name + "/TextQueueProgress").GetComponent<TMP_Text>().text = "progress --%";
         string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
         GameObject.Find(queueitem.name + "/TextBuildingPlanet").GetComponent<TMP_Text>().text = currentPlanetName;
-;
+
 
     }
 }

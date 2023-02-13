@@ -23,7 +23,7 @@ public class ShowBuildingPopup : MonoBehaviour
         else
         {
             refresh();
-
+            
         }
     }
 

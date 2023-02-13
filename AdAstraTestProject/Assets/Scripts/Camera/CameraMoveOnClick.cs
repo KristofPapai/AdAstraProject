@@ -25,6 +25,8 @@ public class CameraMoveOnClick : MonoBehaviour
     public void CameraReset()
     {
         mainCamera.transform.position = cameraStartPos;
+        moveToCelestial = false;
+        CelestialPropPanel.SetActive(false);
     }
     
     public void CameraControll()
@@ -53,9 +55,6 @@ public class CameraMoveOnClick : MonoBehaviour
         if (Input.GetKey("r"))
         {
             CameraReset();
-            moveToCelestial = false;
-            CelestialPropPanel.SetActive(false);
-
         }
     }
 

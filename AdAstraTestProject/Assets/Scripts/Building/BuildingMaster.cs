@@ -74,12 +74,61 @@ public class BuildingMaster : MonoBehaviour
             tempBuilding.BuildingTime = float.Parse(splitter[8]);
             buildings.Add(tempBuilding);
         }
+        Debug.Log(BaseMineGeneration);
+
 
     }
 
+    private float _timer = 0f;
+
+    private double WorkerGenerationBonus = 1f;
+    private double BaseMineGeneration = 2f;
+
+
+    public void GenerateReasurces()
+    {
+        _timer += Time.deltaTime;
+        if (_timer >= 15f)
+        {
+            _timer = 0f;
+
+            foreach (Building building in classBuiltGroundBuildings)
+            {
+                string[] namesplit = building.Name.Split('-');
+                if (namesplit.Count() > 1)
+                {
+                    this.GetComponent<PlanetProperties>().PlanetRareMaterials[namesplit[0]] -= BaseMineGeneration * WorkerGenerationBonus; ;
+                    stockpile[namesplit[0]] += BaseMineGeneration * WorkerGenerationBonus;
+                    
+                    
+                }
+            }
+            refreshRareMat();
+
+        }
+    }
+
+
+    private void refreshRareMat()
+    {
+        if (GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected != null && this.gameObject == GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected)
+        {
+            GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().stockpileListing(this.gameObject);
+            GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().refreshPlanetMaterial(this.gameObject);
+        }
+    }
+
+
     private void FixedUpdate()
     {
-        MiningOperations();
+        if (haveminingOps == false)
+        {
+            MiningOperations();
+        }
+        else
+        {
+            GenerateReasurces();
+        }
     }
 
     public void BuildingBuilder()
@@ -121,7 +170,7 @@ public class BuildingMaster : MonoBehaviour
             {
                 BuiltUpgradeBuildings.Add("Outpost");
                 UpgradeBuildings.Remove("FOB");
-                Debug.Log("Built Outpost");
+
                 AbleToBuild.AddRange(lvl2Buildings);
 
                 foreach (Building item in buildings)
@@ -180,8 +229,6 @@ public class BuildingMaster : MonoBehaviour
 
 
 
-
-
     public void GenerateMIT(double UE,double Influence,double Tech)
     {
         this.gameObject.GetComponent<PlanetProperties>().GenUniEuros += UE;
@@ -205,7 +252,7 @@ public class BuildingMaster : MonoBehaviour
         {
             GameObject.Find("TextMainButton").GetComponent<TMP_Text>().text = "upgrade operations";
         }
-        if (BuiltGroundBuildings.Contains("Warehouses,500,500,0,0"))
+        if (classBuiltGroundBuildings.Any(x => (x.Name == "Warehouses")))
         {
             GameObject.Find("TextStockpile").GetComponent<TMP_Text>().text = "local stockpile /// available";
         }
@@ -240,7 +287,7 @@ public class BuildingMaster : MonoBehaviour
     {
         if (classBuiltGroundBuildings.Any(x => (x.Name == "Warehouses")) && classBuiltGroundBuildings.Any(x => (x.Name == "Surface Mining")) && haveminingOps == false)
         {
-            foreach (string item in this.GetComponent<PlanetProperties>().PlanetRareMaterials)
+            foreach (string item in this.GetComponent<PlanetProperties>().PlanetRareMaterials.Keys)
             {
                 //this.GetComponent<BuildingMaster>().AbleToBuild.Add(item + "mine,500,50,100,0,300");
                 Building temp = new Building();
@@ -252,7 +299,7 @@ public class BuildingMaster : MonoBehaviour
                 temp.UniEurosGenerate = 100;
                 temp.InfluenceGenerate = 0;
                 temp.TechGenerate = 0;
-                temp.BuildingTime = 400;
+                temp.BuildingTime = 10;
                 this.GetComponent<BuildingMaster>().classAbleToBuild.Add(temp);
 
             }

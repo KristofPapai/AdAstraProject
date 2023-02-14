@@ -42,23 +42,8 @@ public class ShowBuildingPopup : MonoBehaviour
             GameObject.Find(item.Name + "/TextBuildingName").GetComponent<TMP_Text>().text = item.Name;
             GameObject.Find(item.Name + "/TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// " + item.UniEurosPrice;
             GameObject.Find(item.Name + "/TextReqTech").GetComponent<TMP_Text>().text = "tecH /// " + item.TechPrice;
+            GameObject.Find(item.Name + "/TextBuildingTime").GetComponent<TMP_Text>().text = "Assembly /// " + item.BuildingTime+" days";
         }
-
-
-
-        //List<string> availablebuildings = currentPlanet.GetComponent<BuildingMaster>().AbleToBuild;
-        //foreach (string building in availablebuildings)
-        //{
-
-        //    GameObject button = Instantiate(buttonprefab, verticalLayout.transform);
-        //    button.transform.SetParent(verticalLayout.transform);
-        //    string[] splitted = building.Split(',');
-        //    button.transform.name = building;
-        //    GameObject.Find(building + "/TextBuildingName").GetComponent<TMP_Text>().text = splitted[0];
-        //    GameObject.Find(building + "/TextReqUniEuros").GetComponent<TMP_Text>().text = "unieuros /// " + splitted[1];
-        //    GameObject.Find(building + "/TextReqTech").GetComponent<TMP_Text>().text = "tecH /// " + splitted[2];
-
-        //}
     }
 
     public void killchildren()
@@ -69,18 +54,18 @@ public class ShowBuildingPopup : MonoBehaviour
         }
     }
 
-    public void MiningOperations()
-    {
-        string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
-        GameObject currentPlanet = GameObject.Find(currentPlanetName);
-        if (currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Warehouses,500,500,0,0") && currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Surface Mining,500,500,100,0,200"))
-        {
-            foreach (string item in currentPlanet.GetComponent<BuildingMaster>().stockpile.Keys)
-            {
+    //public void MiningOperations()
+    //{
+    //    string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
+    //    GameObject currentPlanet = GameObject.Find(currentPlanetName);
+    //    if (currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Warehouses,500,500,0,0") && currentPlanet.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Surface Mining,500,500,100,0,200"))
+    //    {
+    //        foreach (string item in currentPlanet.GetComponent<BuildingMaster>().stockpile.Keys)
+    //        {
 
-            }
-        }
+    //        }
+    //    }
 
-    }
+    //}
 
 }

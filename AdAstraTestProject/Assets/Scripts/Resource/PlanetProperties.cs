@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +13,8 @@ public class PlanetProperties : MonoBehaviour
     public bool IsMotherPlanet = false;
 
     List<string> RareMaterials = new List<string>() { "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium" }; // "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium"
-    public List<string> PlanetRareMaterials = new List<string>();
+    //public List<string> PlanetRareMaterials = new List<string>();
+    public Dictionary<string, double> PlanetRareMaterials = new Dictionary<string, double>();
 
 
     public GameObject FloatingTextPrefab;
@@ -30,10 +32,11 @@ public class PlanetProperties : MonoBehaviour
         int counter = 0;
         do
         {
+            
             int tempIndex = Random.Range(0, RareMaterials.Count);
-            if (!PlanetRareMaterials.Contains(RareMaterials[tempIndex]))
+            if (!PlanetRareMaterials.Keys.Contains(RareMaterials[tempIndex]))
             {
-                PlanetRareMaterials.Add(RareMaterials[tempIndex]);
+                PlanetRareMaterials.Add(RareMaterials[tempIndex],Random.Range(10000,50000));
                 counter++;
             }
 

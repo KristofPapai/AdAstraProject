@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 //using System.Numerics;
 using Unity.VisualScripting;
@@ -11,7 +12,7 @@ public class CameraMoveOnClick : MonoBehaviour
 {
     public Camera mainCamera;
     Vector3 cameraStartPos;
-    GameObject selected;
+    public GameObject selected;
     public float speed = 100.0f;
     private bool moveToCelestial = false;
     public Rect dropDownRect = new Rect(125, 50, 125, 300);
@@ -75,11 +76,8 @@ public class CameraMoveOnClick : MonoBehaviour
         float w = canvas.GetComponent<RectTransform>().rect.width;
         foreach (GameObject planet in planets)
         {
-            GameObject button = Instantiate(buttonPrefab);
+            GameObject button = Instantiate(buttonPrefab, verticalLayout.transform);
             button.transform.SetParent(verticalLayout.transform);
-            button.transform.localPosition = new Vector3((-60)-(w/3), (h/2) - buttonStack, 0);
-            button.transform.localScale = new Vector3(1f,1f,1f);
-            button.transform.rotation = canvas.transform.rotation;
             button.GetComponent<Button>().onClick.AddListener(OnClick);
             button.GetComponentInChildren<TMP_Text>().text = planet.name;
 
@@ -97,6 +95,7 @@ public class CameraMoveOnClick : MonoBehaviour
         CelestialPropPanel.SetActive(true);
         SideGuiMaster(selected);
     }
+
 
 
     void Update()
@@ -120,32 +119,52 @@ public class CameraMoveOnClick : MonoBehaviour
             popup.SetActive(false);
         }
         TextPlanetName.text = Selected.transform.name;
-        List<string> selectedRareMaterials = Selected.GetComponent<PlanetProperties>().PlanetRareMaterials;
-        selected.GetComponent<BuildingMaster>().clickToPlanet();
-        string builder = "";
-        foreach (string material in selectedRareMaterials)
-        {
-            builder += material + "\n";
-        }
-        ListPlanetMaterials.text = builder.ToLower();
-        if (selected.GetComponent<BuildingMaster>().BuiltGroundBuildings.Contains("Warehouses,500,500,0,0"))
+        Selected.GetComponent<BuildingMaster>().clickToPlanet();
+        refreshPlanetMaterial(Selected);
+        if (selected.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Any(x => (x.Name == "Warehouses")))
         {
             stockpileListing(selected);
         }
         else
         {
             ListLocalStockPile.text = "///none///";
-
         }
+        buildingListing(selected);
 
     }
+
+    public void refreshPlanetMaterial(GameObject Selected)
+    {
+        Dictionary<string, double> selectedRareMaterials = Selected.GetComponent<PlanetProperties>().PlanetRareMaterials;
+        string builder = "";
+        foreach (var material in selectedRareMaterials)
+        {
+            builder += material.Key + " - " + material.Value + " unit" + "\n";
+        }
+        ListPlanetMaterials.text = builder.ToLower();
+    }
+
+
+
 
     public void stockpileListing(GameObject selected) 
     {
         ListLocalStockPile.text = "";
         foreach (var item in selected.GetComponent<BuildingMaster>().stockpile)
         {
-            ListLocalStockPile.text += item.Key + " = " + item.Value + "\n";
+            ListLocalStockPile.text += item.Key + " = " + item.Value + " unit" + "\n";
         }
+    }
+
+
+    public TMP_Text outBuiltBuilding;
+    public void buildingListing(GameObject Selected)
+    {
+        outBuiltBuilding.text = "";
+        foreach (Building building in selected.GetComponent<BuildingMaster>().classBuiltGroundBuildings)
+        {
+            outBuiltBuilding.text += building.Name + "\n";
+        }
+
     }
 }

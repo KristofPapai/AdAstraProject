@@ -22,7 +22,6 @@ public class BuildTimer : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //double percentage = ((float)Math.Round(-_timer/10.0))*10;
         int percentage = (int)Math.Round((double)(100 * _timer) / _duration);
         GameObject.Find(this.name + "/TextQueueProgress").GetComponent<TMP_Text>().text = "progress: "+percentage+"%";
         _timer += Time.deltaTime;
@@ -30,34 +29,30 @@ public class BuildTimer : MonoBehaviour
         {
             _timer = 0f;
             buildBuilding();
+            if (GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected != null && currentPlanet == GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected)
+            {
+                GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().buildingListing(currentPlanet);
+            }
             Destroy(this.gameObject);
         }
     }
 
     public void buildBuilding()
     {
-
-        //string[] splitter = this.gameObject.name.Split(',');
         double price = curentBuildingData.UniEurosPrice;
         double techprice = curentBuildingData.TechPrice;
-        //currentPlanet.GetComponent<BuildingMaster>().enoughResource_UE_TECH(price, techprice);
         if (currentPlanet.GetComponent<BuildingMaster>().enoughResource_UE_TECH(price, techprice))
         {
             currentPlanet.GetComponent<BuildingMaster>().classAbleToBuild.Remove(curentBuildingData);
             currentPlanet.GetComponent<BuildingMaster>().GenerateMIT(curentBuildingData.UniEurosGenerate, curentBuildingData.InfluenceGenerate, curentBuildingData.TechGenerate);
-            //string[] splitter2 = this.name.Split(",");
-            //string toAbletoBuild = "";
-            //for (int i = 1; i < splitter2.Length; i++)
-            //{
-            //    toAbletoBuild += splitter2[i] + ",";
-            //}
-            //toAbletoBuild = toAbletoBuild.Substring(0, toAbletoBuild.Length - 1);
             currentPlanet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Add(curentBuildingData);
-            //Debug.Log(currentPlanet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Count);
-            Debug.Log(curentBuildingData.Name);
             if (this.name == "queue item,Warehouses")
             {
                 isStockpile();
+                if (GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected != null && GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected == currentPlanet)
+                {
+                    GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().stockpileListing(currentPlanet);
+                }
             }
             Destroy(this.gameObject);
         }
@@ -70,12 +65,12 @@ public class BuildTimer : MonoBehaviour
     public void isStockpile()
     {
 
-        GameObject.Find("TextStockpile").GetComponent<TMP_Text>().text = "local stockpile /// available";
-        foreach (string item in currentPlanet.GetComponent<PlanetProperties>().PlanetRareMaterials)
+        //GameObject.Find("TextStockpile").GetComponent<TMP_Text>().text = "local stockpile /// available";
+        foreach (string item in currentPlanet.GetComponent<PlanetProperties>().PlanetRareMaterials.Keys)
         {
             currentPlanet.GetComponent<BuildingMaster>().stockpile.Add(item, 0);
         }
-        GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().stockpileListing(currentPlanet);
+        //GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().stockpileListing(currentPlanet);
     }
 
 

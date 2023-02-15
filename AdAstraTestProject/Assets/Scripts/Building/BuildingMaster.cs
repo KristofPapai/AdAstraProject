@@ -74,7 +74,6 @@ public class BuildingMaster : MonoBehaviour
             tempBuilding.BuildingTime = float.Parse(splitter[8]);
             buildings.Add(tempBuilding);
         }
-        Debug.Log(BaseMineGeneration);
 
 
     }

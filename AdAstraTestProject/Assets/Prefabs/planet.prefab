@@ -256,7 +256,6 @@ MonoBehaviour:
   GenInfluence: 0
   GenTech: 0
   IsMotherPlanet: 0
-  PlanetRareMaterials: []
   FloatingTextPrefab: {fileID: 2964250974393494614, guid: cb7081db7f047344fa5b8f5a36793cbc, type: 3}
 --- !u!114 &5676585740422775767
 MonoBehaviour:

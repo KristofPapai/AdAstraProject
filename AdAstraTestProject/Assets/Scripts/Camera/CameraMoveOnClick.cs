@@ -72,8 +72,8 @@ public class CameraMoveOnClick : MonoBehaviour
         cameraStartPos = mainCamera.transform.position;
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
         float buttonStack = 15;
-        float h = canvas.GetComponent<RectTransform>().rect.height;
-        float w = canvas.GetComponent<RectTransform>().rect.width;
+        //float h = canvas.GetComponent<RectTransform>().rect.height;
+        //float w = canvas.GetComponent<RectTransform>().rect.width;
         foreach (GameObject planet in planets)
         {
             GameObject button = Instantiate(buttonPrefab, verticalLayout.transform);
@@ -84,7 +84,7 @@ public class CameraMoveOnClick : MonoBehaviour
         }
 
     }
-
+    public GameObject CompanyManagerScreen;
     void OnClick()
     {
         string PlanetName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
@@ -94,6 +94,10 @@ public class CameraMoveOnClick : MonoBehaviour
         moveToCelestial = true;
         CelestialPropPanel.SetActive(true);
         SideGuiMaster(selected);
+        if (CompanyManagerScreen.active)
+        {
+           CompanyManagerScreen.SetActive(false);
+        }
     }
 
 

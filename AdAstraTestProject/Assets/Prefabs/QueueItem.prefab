@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: BuildingPlanetName
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
-  m_sharedMaterial: {fileID: -2144858777694728560, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
+  m_sharedMaterial: {fileID: 8170387987508411895, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -203,8 +203,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: progress --%
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
-  m_sharedMaterial: {fileID: -2144858777694728560, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
+  m_sharedMaterial: {fileID: 8170387987508411895, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -338,8 +338,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: buildingname
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
-  m_sharedMaterial: {fileID: -2144858777694728560, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
+  m_sharedMaterial: {fileID: 8170387987508411895, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -479,7 +479,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 9b73e89f65dcb0641b55c260676dc989, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -510,11 +510,11 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.08235294, g: 0.0627451, b: 0.27058825, a: 1}
-    m_HighlightedColor: {r: 0.25490198, g: 0.23137257, b: 0.47450984, a: 1}
-    m_PressedColor: {r: 0.08235294, g: 0.0627451, b: 0.27058825, a: 1}
-    m_SelectedColor: {r: 0.08235294, g: 0.0627451, b: 0.27058825, a: 1}
-    m_DisabledColor: {r: 0.08235294, g: 0.0627451, b: 0.27058825, a: 1}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0, g: 0.7686275, b: 0.7372549, a: 1}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -648,10 +648,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'on planet:'
+  m_text: 'On planet:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
-  m_sharedMaterial: {fileID: -2144858777694728560, guid: 7598c425e81f33b46ba5cb887154c17c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
+  m_sharedMaterial: {fileID: 8170387987508411895, guid: 04dcb7de84ca23d4fad6ffa463c22de4, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -35,6 +35,9 @@ public class BuildingMaster : MonoBehaviour
     public bool upgraded = false;
 
 
+    private Dictionary<string, double> HomeStockpile = new Dictionary<string, double>();
+
+
 
     //class update
     public List<string> AllBuildings = new List<string>{
@@ -82,6 +85,27 @@ public class BuildingMaster : MonoBehaviour
 
     private double WorkerGenerationBonus = 1f;
     private double BaseMineGeneration = 2f;
+
+    public void AddHomeStockpile(string MaterialName, double MaterialAmount)
+    {
+        HomeStockpile.Add(MaterialName, MaterialAmount);
+    }
+
+    public double DeductHomeStockpile(string MaterialName, double MaterialAmount)
+    {
+        if (HomeStockpile[MaterialName] - MaterialAmount >= 0)
+        {
+            HomeStockpile[MaterialName] = HomeStockpile[MaterialName] - MaterialAmount;
+            return MaterialAmount;
+        }
+        else
+        {
+            double tempDouble = HomeStockpile[MaterialName] - MaterialAmount;
+            MaterialAmount = MaterialAmount + tempDouble;
+            HomeStockpile[MaterialName] = 0;
+            return MaterialAmount;
+        }
+    }
 
 
     public void GenerateReasurces()

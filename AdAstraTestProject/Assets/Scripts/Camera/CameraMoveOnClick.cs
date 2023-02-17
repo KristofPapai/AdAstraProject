@@ -98,6 +98,10 @@ public class CameraMoveOnClick : MonoBehaviour
         {
            CompanyManagerScreen.SetActive(false);
         }
+        if (selected.GetComponent<PlanetProperties>().IsMotherPlanet == true)
+        {
+            CelestialPropPanel.SetActive(false);
+        }
     }
 
 

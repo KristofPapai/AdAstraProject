@@ -74,7 +74,7 @@ public class ResourceMaster : MonoBehaviour
         }
     }
     
-    Resources resourceMaster = new Resources(30000,30000,30000);
+    static Resources resourceMaster = new Resources(30000,30000,30000);
     public Camera mainCamera;
 
     [SerializeField] private float _duration = 5f;
@@ -103,9 +103,9 @@ public class ResourceMaster : MonoBehaviour
     }
 
 
-    public double OutUniEuros = 0;
-    public double OutInfluence = 0;
-    public double OutTech = 0;
+    public double OutUniEuros = resourceMaster.UniEuros;
+    public double OutInfluence = resourceMaster.Influence;
+    public double OutTech = resourceMaster.Tech;
 
     
     

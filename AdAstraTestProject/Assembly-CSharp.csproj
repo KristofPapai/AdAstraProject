@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\LookAtTarget.cs" />
     <Compile Include="Assets\Scripts\Building\BuildingButton.cs" />
     <Compile Include="Assets\Scripts\Building\ShowBuildingPopup.cs" />
+    <Compile Include="Assets\Scripts\bloomflicker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Scripts\Resource\generatedMIT.cs" />
     <Compile Include="Assets\Scripts\ConditionalHideAttribute.cs" />
@@ -126,7 +127,12 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Scripts\bloomflicker.cs" />
+    <Compile Include="Assets\Scripts\Fleet\MultiButton.cs" />
+    <Compile Include="Assets\Scripts\Fleet\ToogleOrderShipsButton.cs" />
+    <Compile Include="Assets\Scripts\Fleet\OrderFleetButton.cs" />
+    <Compile Include="Assets\Scripts\Fleet\FleetMaster.cs" />
+    <Compile Include="Assets\Scripts\Fleet\TransportClass.cs" />
+    <Compile Include="Assets\Scripts\Fleet\PmcClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

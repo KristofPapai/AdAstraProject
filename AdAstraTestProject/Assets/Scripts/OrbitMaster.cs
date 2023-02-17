@@ -19,6 +19,7 @@ public class OrbitMaster : MonoBehaviour
     public Button hudbutton;
     private List<GameObject> planets = new List<GameObject>();
     public Camera mainCamera;
+    public Color color;
     //public Transform parent;
 
     // Start is called before the first frame update
@@ -108,6 +109,7 @@ public class OrbitMaster : MonoBehaviour
                     {
                         childPlanet.GetComponent<PlanetProperties>().IsMotherPlanet = true;
                         haveMotherPlanet=true;
+                        childPlanet.GetComponent<Renderer>().material.color = color;
                     }
                     //Debug.Log("rocky planet");
                     break;
@@ -119,7 +121,7 @@ public class OrbitMaster : MonoBehaviour
                     {
                         childPlanet.GetComponent<PlanetProperties>().IsMotherPlanet = true;
                         haveMotherPlanet = true;
-
+                        childPlanet.GetComponent<Renderer>().material.color = color;
                     }
                     break;
                 case 3:
@@ -130,6 +132,7 @@ public class OrbitMaster : MonoBehaviour
                     {
                         childPlanet.GetComponent<PlanetProperties>().IsMotherPlanet = true;
                         haveMotherPlanet = true;
+                        childPlanet.GetComponent<Renderer>().material.color = color;
 
                     }
                     break;

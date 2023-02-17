@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5791414761632849944}
   - component: {fileID: 7011379103277481189}
   - component: {fileID: 5676585740422775767}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: planet
   m_TagString: Celestial
   m_Icon: {fileID: 0}

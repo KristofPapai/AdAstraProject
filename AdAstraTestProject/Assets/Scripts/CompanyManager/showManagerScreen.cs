@@ -23,5 +23,6 @@ public class showManagerScreen : MonoBehaviour
     {
         CompanyManagerPanel.SetActive(true);
         GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().CameraReset();
+        
     }
 }

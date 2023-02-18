@@ -12,6 +12,7 @@ public class CameraMoveOnClick : MonoBehaviour
 {
     public Camera mainCamera;
     Vector3 cameraStartPos;
+
     public GameObject selected;
     public float speed = 100.0f;
     private bool moveToCelestial = false;
@@ -26,6 +27,7 @@ public class CameraMoveOnClick : MonoBehaviour
     public void CameraReset()
     {
         mainCamera.transform.position = cameraStartPos;
+        //mainCamera.transform.Rotate(+19.21f, 0f, 0f);
         moveToCelestial = false;
         CelestialPropPanel.SetActive(false);
     }
@@ -87,6 +89,7 @@ public class CameraMoveOnClick : MonoBehaviour
     public GameObject CompanyManagerScreen;
     void OnClick()
     {
+        //mainCamera.transform.Rotate(-19.21f, 0f, 0f);
         string PlanetName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
         selected = GameObject.Find(PlanetName);
         List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;

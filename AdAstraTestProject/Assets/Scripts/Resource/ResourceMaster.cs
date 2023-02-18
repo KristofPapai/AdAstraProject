@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -115,6 +116,7 @@ public class ResourceMaster : MonoBehaviour
     public TextMeshProUGUI genuni;
     public TextMeshProUGUI gentech;
     public TextMeshProUGUI geninf;
+    public TMP_Text fleetUpkeep;
 
 
     void Update()
@@ -127,25 +129,27 @@ public class ResourceMaster : MonoBehaviour
             double generatedinfluence = 0;
 
             planets = GameObject.FindGameObjectsWithTag("Celestial");
-            //Debug.Log(planets.Length);
             _timer = 0f;
-            //Debug.Log("intervall");
+            generatedunieuros -= double.Parse(fleetUpkeep.text.Split(' ')[0]);
             foreach (GameObject planet in planets)
             {
-                resourceMaster.AddUniEuros(planet.GetComponent<PlanetProperties>().GenUniEuros);
-                resourceMaster.AddInfluence(planet.GetComponent<PlanetProperties>().GenInfluence);
-                resourceMaster.AddTech(planet.GetComponent<PlanetProperties>().GenTech);
+                //resourceMaster.AddUniEuros(planet.GetComponent<PlanetProperties>().GenUniEuros);
+                //resourceMaster.AddInfluence(planet.GetComponent<PlanetProperties>().GenInfluence);
+                //resourceMaster.AddTech(planet.GetComponent<PlanetProperties>().GenTech);
                 generatedunieuros += planet.GetComponent<PlanetProperties>().GenUniEuros;
                 generatedtech += planet.GetComponent<PlanetProperties>().GenTech;
                 generatedinfluence += planet.GetComponent<PlanetProperties>().GenInfluence;
-                genuni.text = "+"+generatedunieuros;
-                gentech.text = "+" + generatedtech;
-                geninf.text = "+" + generatedinfluence;
-
-                OutUniEuros = resourceMaster.UniEuros;
-                OutInfluence = resourceMaster.Influence;
-                OutTech = resourceMaster.Tech;
             }
+            OutUniEuros = resourceMaster.UniEuros;
+            OutInfluence = resourceMaster.Influence;
+            OutTech = resourceMaster.Tech;
+            genuni.text = "" + generatedunieuros;
+            gentech.text = "" + generatedtech;
+            geninf.text = "" + generatedinfluence;
+            resourceMaster.AddUniEuros(generatedunieuros);
+            resourceMaster.AddInfluence(generatedtech);
+            resourceMaster.AddTech(generatedinfluence);
+
         }
     }
 

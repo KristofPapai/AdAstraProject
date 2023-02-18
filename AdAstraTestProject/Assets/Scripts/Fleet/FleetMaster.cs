@@ -9,6 +9,8 @@ public class FleetMaster : MonoBehaviour
     public int NumOfPMC;
     public int UpkeepTransport = 5;
     public int UpkeepPMC = 15;
+    public int NumMothTransport;
+    public int NummothPMC;
     private GameObject MotherPlanet;
 
 
@@ -17,6 +19,8 @@ public class FleetMaster : MonoBehaviour
     public TMP_Text TransportSize;
     public TMP_Text PMCSize;
     public TMP_Text Upkeep;
+    public TMP_Text TransportMoth;
+    public TMP_Text PMCMoth;
 
 
     public void UpdateFleetInfo()
@@ -37,6 +41,9 @@ public class FleetMaster : MonoBehaviour
         TransportSize.text = NumOfTransport.ToString();
         PMCSize.text = NumOfPMC.ToString();
         Upkeep.text = ((NumOfPMC * UpkeepPMC) + (NumOfTransport * UpkeepTransport)).ToString() + " UE";
+        TransportMoth.text = NumMothTransport.ToString();
+        PMCMoth.text = NummothPMC.ToString();
+
     }
 
     public void FixedUpdate()

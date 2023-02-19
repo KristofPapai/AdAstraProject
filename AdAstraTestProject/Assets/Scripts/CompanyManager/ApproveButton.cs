@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class ApproveButton : MonoBehaviour
@@ -15,18 +16,48 @@ public class ApproveButton : MonoBehaviour
 
     public GameObject NotEnougUEText;
 
+    
+    FleetMaster FleetMaster;
 
     public void OnClick()
     {
+        FleetMaster = GameObject.Find("ScriptMaster").GetComponent<FleetMaster>();
         if (EnougUE(double.Parse(Cost.text.Split(' ')[0]))
             && int.Parse(CurrentFleetSize.text) - (int.Parse(Scrap.text)+int.Parse(Mothball.text))>= 0
             && int.Parse(CurrentMothBallSize.text) - int.Parse(Recrew.text) >=-0)
         {
 
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NumOfTransport -= (int.Parse(Scrap.text) + int.Parse(Mothball.text));
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NumMothTransport -= int.Parse(Recrew.text);
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NumMothTransport += int.Parse(Mothball.text);
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NumOfTransport += int.Parse(Recrew.text);
+            FleetMaster.NumOfTransport -= (int.Parse(Scrap.text) + int.Parse(Mothball.text));
+            FleetMaster.NumMothTransport -= int.Parse(Recrew.text);
+            FleetMaster.NumMothTransport += int.Parse(Mothball.text);
+            FleetMaster.NumOfTransport += int.Parse(Recrew.text);
+
+
+            int x = 0;
+            foreach (TransportClass transport in FleetMaster.Transportships)
+            {
+                if (x < int.Parse(Recrew.text) && transport.Status == "mothball")
+                {
+                    transport.Status = "standby";
+                    x++;
+                }
+            }
+
+            int i = 0;
+            foreach (TransportClass transport in FleetMaster.Transportships)
+            {
+                if (i < int.Parse(Mothball.text)&& transport.Status != "mothball")
+                {
+                    transport.Status = "mothball";
+                    i++;
+                }
+            }
+            int removeCount = int.Parse(Scrap.text);
+            int listLength = FleetMaster.Transportships.Count - removeCount;
+            FleetMaster.Transportships.RemoveRange(listLength, removeCount);
+
+
+
         }
         else
         {
@@ -36,15 +67,34 @@ public class ApproveButton : MonoBehaviour
 
     public void OnClickPMC()
     {
+        FleetMaster = GameObject.Find("ScriptMaster").GetComponent<FleetMaster>();
         if (EnougUE(double.Parse(Cost.text.Split(' ')[0]))
             && int.Parse(CurrentFleetSize.text) - (int.Parse(Scrap.text) + int.Parse(Mothball.text)) >= 0
             && int.Parse(CurrentMothBallSize.text) - int.Parse(Recrew.text) >= -0)
         {
 
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NumOfPMC -= (int.Parse(Scrap.text) + int.Parse(Mothball.text));
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NummothPMC -= int.Parse(Recrew.text);
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NummothPMC += int.Parse(Mothball.text);
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().NumOfPMC += int.Parse(Recrew.text);
+            int x = 0;
+            foreach (PmcClass pmc in FleetMaster.PMCships)
+            {
+                if (x < int.Parse(Recrew.text) && pmc.Status == "mothball")
+                {
+                    pmc.Status = "standby";
+                    x++;
+                }
+            }
+
+            int i = 0;
+            foreach (PmcClass pmc in FleetMaster.PMCships)
+            {
+                if (i < int.Parse(Mothball.text) && pmc.Status != "mothball")
+                {
+                    pmc.Status = "mothball";
+                    i++;
+                }
+            }
+            int removeCount = int.Parse(Scrap.text);
+            int listLength = FleetMaster.PMCships.Count - removeCount;
+            FleetMaster.PMCships.RemoveRange(listLength, removeCount);
         }
         else
         {

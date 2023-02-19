@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\PorceduralPlanet\ShapeSettings.cs" />
     <Compile Include="Assets\Scripts\OrbitMaster.cs" />
     <Compile Include="Assets\Scripts\LookAtTarget.cs" />
+    <Compile Include="Assets\Scripts\CompanyManager\ApproveButton.cs" />
     <Compile Include="Assets\Scripts\Building\BuildingButton.cs" />
     <Compile Include="Assets\Scripts\Building\ShowBuildingPopup.cs" />
     <Compile Include="Assets\Scripts\bloomflicker.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\Fleet\TransportClass.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraMoveOnClick.cs" />
     <Compile Include="Assets\Scripts\Resource\PlanetProperties.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
@@ -96,6 +98,7 @@
     <Compile Include="Assets\Scripts\RotateMaster.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\CompanyManager\ZeroAmounts.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\Scripts\PorceduralPlanet\NoiseFilterFactory.cs" />
     <Compile Include="Assets\Scripts\CompanyManager\DateMaster.cs" />
@@ -111,6 +114,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\CompanyManager\TabGroup.cs" />
     <Compile Include="Assets\Scripts\CompanyManager\showManagerScreen.cs" />
+    <Compile Include="Assets\Scripts\Fleet\TradeRouteClass.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\SolarSystem.cs" />
     <Compile Include="Assets\Scripts\ChaseCam.cs" />
@@ -124,6 +128,7 @@
     <Compile Include="Assets\Scripts\PorceduralPlanet\INoiseFilter.cs" />
     <Compile Include="Assets\Scripts\PorceduralPlanet\TerrainFace.cs" />
     <Compile Include="Assets\Scripts\RestartGame.cs" />
+    <Compile Include="Assets\Scripts\Resource\UpkeepMaster.cs" />
     <Compile Include="Assets\Scripts\PorceduralPlanet\ShapeGenerator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
@@ -132,11 +137,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Fleet\MultiButton.cs" />
-    <Compile Include="Assets\Scripts\Fleet\TransportClass.cs" />
-    <Compile Include="Assets\Scripts\Fleet\TradeRouteClass.cs" />
-    <Compile Include="Assets\Scripts\Resource\UpkeepMaster.cs" />
-    <Compile Include="Assets\Scripts\CompanyManager\ApproveButton.cs" />
-    <Compile Include="Assets\Scripts\CompanyManager\ZeroAmounts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

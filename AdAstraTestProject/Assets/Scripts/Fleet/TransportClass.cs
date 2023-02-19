@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransportClass : MonoBehaviour
+public class TransportClass
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //base props
+    public int Shipumber;
+    public int CargoCapacity;
+    public double Firepower;
+    public double Armor;
+    public string Status;
 
-    // Update is called once per frame
-    void Update()
+    public TransportClass()
     {
-        
     }
 }

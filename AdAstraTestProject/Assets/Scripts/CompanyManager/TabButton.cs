@@ -13,6 +13,10 @@ public class TabButton : MonoBehaviour,IPointerEnterHandler,IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         tabGroup.OnTabSelected(this);
+        if (this.name == "Trade Routes")
+        {
+            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().UpdateTradeInfo();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

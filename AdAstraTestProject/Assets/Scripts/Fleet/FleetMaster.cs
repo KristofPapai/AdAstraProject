@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class FleetMaster : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class FleetMaster : MonoBehaviour
     public int UpkeepPMCMoth = 5;
     public int NumMothTransport;
     public int NummothPMC;
+    public double FullUpkeep = 0;
     private GameObject MotherPlanet;
     public List<TradeRouteClass> TradeRoutes = new List<TradeRouteClass>();
     public List<PmcClass> PMCships = new List<PmcClass>();
@@ -34,6 +36,46 @@ public class FleetMaster : MonoBehaviour
     public TMP_Text Upkeep2;
     public TMP_Text TransportMoth2;
     public TMP_Text PMCMoth2;
+
+
+    public GameObject TradeCardVeriticalLayout;
+    public GameObject ButtonPrefab;
+
+    public void UpdateTradeInfo()
+    {
+        //kill all child
+        //when panel open call it once
+        //when trade changed call it again
+        //this is a local thing
+
+
+
+
+        while (TradeCardVeriticalLayout.transform.childCount > 0)
+        {
+            DestroyImmediate(TradeCardVeriticalLayout.transform.GetChild(0).gameObject);
+        }
+        foreach (TradeRouteClass trades in TradeRoutes)
+        {
+            GameObject button = Instantiate(ButtonPrefab, TradeCardVeriticalLayout.transform);
+            button.transform.SetParent(TradeCardVeriticalLayout.transform);
+            button.name = trades.TradeRouteName;
+            //GameObject.Find(item.Name + "/TextBuildingName").GetComponent<TMP_Text>().text = item.Name;
+            GameObject.Find(button.name + "/OutTradeRouteName").GetComponent<TMP_Text>().text = trades.TradeRouteName;
+            GameObject.Find(button.name + "/FrameTargetPlanet/OutTargetPlanet").GetComponent<TMP_Text>().text = trades.TargetPlanet;
+            GameObject.Find(button.name + "/FrameOutHomePlanet/OutHomePlanet").GetComponent<TMP_Text>().text = trades.HomePlanet;
+            GameObject.Find(button.name + "/FrameOutActiveTransport/OutActiveTransports").GetComponent<TMP_Text>().text = trades.Transports.Count.ToString();
+            GameObject.Find(button.name + "/FrameOutPMCs/OutActivePMCs").GetComponent<TMP_Text>().text = trades.PMCs.Count.ToString();
+            GameObject.Find(button.name + "/FrameOutCapacity/OutTransportCapacity").GetComponent<TMP_Text>().text = trades.Cargocapacity().ToString();
+            string materialBuilder = "| ";
+            foreach (string item in trades.TransportedMaterials)
+            {
+                materialBuilder += item + " |";
+            }
+            GameObject.Find(button.name + "/OutTransportedReasurces/OutReasurces").GetComponent<TMP_Text>().text = materialBuilder;
+
+        }
+    }
 
 
     public void UpdateFleetInfo()
@@ -82,7 +124,7 @@ public class FleetMaster : MonoBehaviour
         TransportMoth.text = transportMothed.ToString();
         PMCMoth.text = pmcMothed.ToString();
         Upkeep.text = ((pmcStandby * UpkeepPMC) + (transportStandby * UpkeepTransport) + (transportMothed*UpkeepTransportMoth)+(pmcMothed*UpkeepPMCMoth)).ToString() + " UE";
-
+        FullUpkeep = (pmcStandby * UpkeepPMC) + (transportStandby * UpkeepTransport) + (transportMothed * UpkeepTransportMoth) + (pmcMothed * UpkeepPMCMoth);
 
     }
 

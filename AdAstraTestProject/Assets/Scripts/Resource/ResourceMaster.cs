@@ -130,7 +130,7 @@ public class ResourceMaster : MonoBehaviour
 
             planets = GameObject.FindGameObjectsWithTag("Celestial");
             _timer = 0f;
-            generatedunieuros -= double.Parse(fleetUpkeep.text.Split(' ')[0]);
+            generatedunieuros -= this.GetComponent<FleetMaster>().FullUpkeep;
             foreach (GameObject planet in planets)
             {
                 //resourceMaster.AddUniEuros(planet.GetComponent<PlanetProperties>().GenUniEuros);

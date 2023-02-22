@@ -48,7 +48,7 @@ public class BuildingMaster : MonoBehaviour
         "Surface Mining,2,500,0,500,100,0,0,10",
         "Warehouses,2,500,0,500,0,0,0,10",
         "Core Mining,3,2500,0,700,0,0,300,300",
-        "Starport,3000,3,1000,0,100,100,0,300",
+        "Starport,3,3000,1000,0,100,100,0,10",
         "BioDome,3,1000,0,1000,30,0,30,300"
     };
 

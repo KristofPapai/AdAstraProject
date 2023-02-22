@@ -46,6 +46,7 @@ public class BuildTimer : MonoBehaviour
             currentPlanet.GetComponent<BuildingMaster>().classAbleToBuild.Remove(curentBuildingData);
             currentPlanet.GetComponent<BuildingMaster>().GenerateMIT(curentBuildingData.UniEurosGenerate, curentBuildingData.InfluenceGenerate, curentBuildingData.TechGenerate);
             currentPlanet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Add(curentBuildingData);
+            Debug.Log(curentBuildingData.Name);
             if (this.name == "queue item,Warehouses")
             {
                 isStockpile();
@@ -64,13 +65,10 @@ public class BuildTimer : MonoBehaviour
 
     public void isStockpile()
     {
-
-        //GameObject.Find("TextStockpile").GetComponent<TMP_Text>().text = "local stockpile /// available";
         foreach (string item in currentPlanet.GetComponent<PlanetProperties>().PlanetRareMaterials.Keys)
         {
             currentPlanet.GetComponent<BuildingMaster>().stockpile.Add(item, 0);
         }
-        //GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().stockpileListing(currentPlanet);
     }
 
 

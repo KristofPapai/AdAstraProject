@@ -377,6 +377,7 @@
 "Assets/Scripts/ConditionalHideAttribute.cs"
 "Assets/Scripts/DinamicUI.cs"
 "Assets/Scripts/Fleet/FleetMaster.cs"
+"Assets/Scripts/Fleet/GenericMultiButton.cs"
 "Assets/Scripts/Fleet/MultiButton.cs"
 "Assets/Scripts/Fleet/OrderFleetButton.cs"
 "Assets/Scripts/Fleet/PmcClass.cs"

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Numerics;
 using TMPro;
 using UnityEngine;
 using static UnityEditor.Progress;
@@ -174,9 +176,29 @@ public class FleetMaster : MonoBehaviour
         TransportMoth2.text = transportMothed.ToString();
         PMCMoth2.text = pmcMothed.ToString();
         Upkeep2.text = ((pmcStandby * UpkeepPMC) + (transportStandby * UpkeepTransport) + (transportMothed * UpkeepTransportMoth) + (pmcMothed * UpkeepPMCMoth)).ToString() + " UE";
-
-
+        FullUpkeep = (pmcStandby * UpkeepPMC) + (transportStandby * UpkeepTransport) + (transportMothed * UpkeepTransportMoth) + (pmcMothed * UpkeepPMCMoth);
     }
+
+    public TMP_Dropdown Dropdown;
+
+
+    public void UpdateTradeDropdown()
+    {
+        Debug.Log("Metódusba belépünk");
+        GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
+        List<string> planetNames = new List<string>();
+
+        foreach (GameObject planet in planets)
+        {
+            if (planet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Any(x => x.Name == "Starport"))
+            {
+                Debug.Log(planet.name);
+                planetNames.Add(planet.name);
+            }
+        }
+        Dropdown.AddOptions(planetNames);
+    }
+
 
     public void FixedUpdate()
     {

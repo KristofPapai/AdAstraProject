@@ -184,6 +184,7 @@ public class FleetMaster : MonoBehaviour
 
     public void UpdateTradeDropdown()
     {
+        Dropdown.ClearOptions();
         Debug.Log("Metódusba belépünk");
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
         List<string> planetNames = new List<string>();
@@ -199,6 +200,17 @@ public class FleetMaster : MonoBehaviour
         Dropdown.AddOptions(planetNames);
     }
 
+    public TMP_Text NumOfTradeShips;
+    public TMP_Text NumOfPmcShips;
+    public TMP_Text CargoCapacity;
+    public TMP_Text DeltaVReq;
+    public TMP_Text Cost;
+    public int CurrentCargoCapPerShip = 20; //ez majd scalelhet
+    public void UpdateTradeProps()
+    {
+        CargoCapacity.text = (int.Parse(NumOfTradeShips.text) * CurrentCargoCapPerShip).ToString() + " Unit";
+    }
+
 
     public void FixedUpdate()
     {
@@ -208,6 +220,7 @@ public class FleetMaster : MonoBehaviour
         }
         if (TradeRouteInfoPanel.active)
         {
+            UpdateTradeProps();
             UpdateFleetInfoTradeRoute();
         }
     }

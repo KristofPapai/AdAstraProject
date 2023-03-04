@@ -45,14 +45,6 @@ public class FleetMaster : MonoBehaviour
 
     public void UpdateTradeInfo()
     {
-        //kill all child
-        //when panel open call it once
-        //when trade changed call it again
-        //this is a local thing
-
-
-
-
         while (TradeCardVeriticalLayout.transform.childCount > 0)
         {
             DestroyImmediate(TradeCardVeriticalLayout.transform.GetChild(0).gameObject);
@@ -182,10 +174,37 @@ public class FleetMaster : MonoBehaviour
     public TMP_Dropdown Dropdown;
 
 
-    public void UpdateTradeDropdown()
+    //public void updateMaterialDorpdown()
+    //{
+    //    if (Dropdown.itemText.text != "Select target planet" && Dropdown.itemText.text != "")
+    //    {
+    //        string PlanetName = Dropdown.options[Dropdown.value].text;
+    //        GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
+    //        foreach (GameObject planet in planets)
+    //        {
+    //            if (planet.name == PlanetName)
+    //            {
+    //                List<string> tempMatList = new List<string>();
+    //                foreach (string material in planet.GetComponent<PlanetProperties>().PlanetRareMaterials.Keys)
+    //                {
+    //                    tempMatList.Add(material);
+    //                    Debug.Log(material);
+    //                }
+    //            }
+    //        }
+    //    }
+    //}
+
+    public GameObject PrefabTradePlanetButton;
+    public GameObject PrefabTradeMaterialButton;
+    public GameObject TradePlanetVertical;
+    public GameObject TradeMaterialVertical;
+    public void UpdateTradeScroll()
     {
-        Dropdown.ClearOptions();
-        Debug.Log("Metódusba belépünk");
+        while (TradePlanetVertical.transform.childCount > 0)
+        {
+            DestroyImmediate(TradePlanetVertical.transform.GetChild(0).gameObject);
+        }
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
         List<string> planetNames = new List<string>();
 
@@ -193,11 +212,13 @@ public class FleetMaster : MonoBehaviour
         {
             if (planet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Any(x => x.Name == "Starport"))
             {
-                Debug.Log(planet.name);
                 planetNames.Add(planet.name);
+                GameObject tempButton = Instantiate(PrefabTradePlanetButton, TradePlanetVertical.transform);
+                tempButton.name = planet.name;
+                tempButton.transform.SetParent(TradePlanetVertical.transform);
+                tempButton.GetComponentInChildren<TMP_Text>().text = planet.name;
             }
         }
-        Dropdown.AddOptions(planetNames);
     }
 
     public TMP_Text NumOfTradeShips;
@@ -222,6 +243,7 @@ public class FleetMaster : MonoBehaviour
         {
             UpdateTradeProps();
             UpdateFleetInfoTradeRoute();
+            //updateMaterialDorpdown();
         }
     }
 }

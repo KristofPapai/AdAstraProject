@@ -16,7 +16,7 @@ public class TabButton : MonoBehaviour,IPointerEnterHandler,IPointerClickHandler
         if (this.name == "Trade Routes")
         {
             GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().UpdateTradeInfo();
-            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().UpdateTradeDropdown();
+            GameObject.Find("ScriptMaster").GetComponent<FleetMaster>().UpdateTradeScroll();
         }
     }
 

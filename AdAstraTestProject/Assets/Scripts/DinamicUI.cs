@@ -16,7 +16,7 @@ public class DinamicUI : MonoBehaviour
         string PlanetName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
         selected = GameObject.Find(PlanetName);
 
-        selected.GetComponent<BuildingMaster>().AbleToBuild.RemoveAt(val);
+        //selected.GetComponent<BuildingMaster>().AbleToBuild.RemoveAt(val);
 
     }
 

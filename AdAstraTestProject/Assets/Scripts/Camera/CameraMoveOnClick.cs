@@ -44,7 +44,7 @@ public class CameraMoveOnClick : MonoBehaviour
                 if (hit.transform.tag == "Celestial" && selected != hit.transform.gameObject && hit.transform.gameObject.layer != 4)
                 {
                     selected = hit.transform.gameObject;
-                    List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
+                    //List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
                     SideGuiMaster(selected);
                     moveToCelestial = true;
                     CelestialPropPanel.SetActive(true);
@@ -92,7 +92,7 @@ public class CameraMoveOnClick : MonoBehaviour
         //mainCamera.transform.Rotate(-19.21f, 0f, 0f);
         string PlanetName = EventSystem.current.currentSelectedGameObject.GetComponentInChildren<TMP_Text>().text;
         selected = GameObject.Find(PlanetName);
-        List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
+        //List<string> availablebuildings = selected.GetComponent<BuildingMaster>().AbleToBuild;
         mainCamera.transform.position = new Vector3(selected.transform.position.x, selected.transform.position.y + 40, selected.transform.position.z - 40);
         moveToCelestial = true;
         CelestialPropPanel.SetActive(true);

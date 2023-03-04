@@ -19,11 +19,11 @@ public class BuildingMaster : MonoBehaviour
     public File txtBuildings = new File();
 
     public List<string> UpgradeBuildings = new List<string>() { "FOB", "Outpost", "Permament Base Facility" };
-    public List<string> lvl1Buildings = new List<string>() { "Rover Hangar,200,50,10,0,10", "Research Quarters,100,200,10,50,120", "Operation Deck,300,20,10,10,120" }; //making a small ammount of money and tech
-    public List<string> lvl2Buildings = new List<string>() { "Apartments,100,200,0,0,200", "Surface Mining,500,500,100,0,10", "Warehouses,500,500,0,0,10" }; //mining of rare materials and stockpileing it also more income
-    public List<string> lvl3Buildings = new List<string>() { "Core Mining,2500,700,0,0,300", "Starport,3000,1000,100,100,300", "BioDome,1000,1000,30,30,300" }; //shipping routes and cargo ports
+    //public List<string> lvl1Buildings = new List<string>() { "Rover Hangar,200,50,10,0,10", "Research Quarters,100,200,10,50,120", "Operation Deck,300,20,10,10,120" }; //making a small ammount of money and tech
+    //public List<string> lvl2Buildings = new List<string>() { "Apartments,100,200,0,0,200", "Surface Mining,500,500,100,0,10", "Warehouses,500,500,0,0,10" }; //mining of rare materials and stockpileing it also more income
+    //public List<string> lvl3Buildings = new List<string>() { "Core Mining,2500,700,0,0,300", "Starport,3000,1000,100,100,300", "BioDome,1000,1000,30,30,300" }; //shipping routes and cargo ports
     private List<string> textSaveing = new List<string>() {"current operations\n/// none","unieuros /// 1000","tech /// 100"}; //oplevel,buttons,
-    public List<string> AbleToBuild = new List<string>();
+    //public List<string> AbleToBuild = new List<string>();
     public Dictionary<string, double> stockpile = new Dictionary<string, double>();
 
 
@@ -120,9 +120,15 @@ public class BuildingMaster : MonoBehaviour
                 string[] namesplit = building.Name.Split('-');
                 if (namesplit.Count() > 1)
                 {
-                    this.GetComponent<PlanetProperties>().PlanetRareMaterials[namesplit[0]] -= BaseMineGeneration * WorkerGenerationBonus; ;
-                    stockpile[namesplit[0]] += BaseMineGeneration * WorkerGenerationBonus;
-                    
+                    if ((this.GetComponent<PlanetProperties>().PlanetRareMaterials[namesplit[0]] - (BaseMineGeneration * WorkerGenerationBonus)) >=0)
+                    {
+                        this.GetComponent<PlanetProperties>().PlanetRareMaterials[namesplit[0]] -= BaseMineGeneration * WorkerGenerationBonus;
+                        stockpile[namesplit[0]] += BaseMineGeneration * WorkerGenerationBonus;
+                    }
+                    else
+                    {
+                        this.GetComponent<PlanetProperties>().PlanetRareMaterials[namesplit[0]] = 0;
+                    }
                     
                 }
             }
@@ -162,7 +168,7 @@ public class BuildingMaster : MonoBehaviour
             {
                 BuiltUpgradeBuildings.Add("FOB");
                 UpgradeBuildings.Remove("FOB");
-                AbleToBuild.AddRange(lvl1Buildings);
+                //AbleToBuild.AddRange(lvl1Buildings);
                 foreach (Building item in buildings)
                 {
                     if (item.Level == 1)
@@ -194,7 +200,7 @@ public class BuildingMaster : MonoBehaviour
                 BuiltUpgradeBuildings.Add("Outpost");
                 UpgradeBuildings.Remove("FOB");
 
-                AbleToBuild.AddRange(lvl2Buildings);
+                //AbleToBuild.AddRange(lvl2Buildings);
 
                 foreach (Building item in buildings)
                 {
@@ -220,7 +226,7 @@ public class BuildingMaster : MonoBehaviour
             {
                 BuiltUpgradeBuildings.Add("Permament Base Facility");
                 Debug.Log("Built Permament Base Facility");
-                AbleToBuild.AddRange(lvl3Buildings);
+                //AbleToBuild.AddRange(lvl3Buildings);
 
 
                 foreach (Building item in buildings)

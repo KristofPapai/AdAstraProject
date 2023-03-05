@@ -11,6 +11,8 @@ public class TradePlanetSelect : MonoBehaviour
     {
 
         GameObject outPlanet = GameObject.Find("OutSelectedPlanet");
+        GameObject outMaterial = GameObject.Find("OutSelectedMaterial");
+        outMaterial.GetComponent<TMP_Text>().text = "Select material";
         outPlanet.GetComponent<TMP_Text>().text = this.name;
         string PlanetName = this.name;
         GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");

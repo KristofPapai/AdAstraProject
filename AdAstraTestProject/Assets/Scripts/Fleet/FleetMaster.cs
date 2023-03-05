@@ -59,7 +59,8 @@ public class FleetMaster : MonoBehaviour
             GameObject.Find(button.name + "/FrameTargetPlanet/OutTargetPlanet").GetComponent<TMP_Text>().text = trades.TargetPlanet;
             GameObject.Find(button.name + "/FrameOutHomePlanet/OutHomePlanet").GetComponent<TMP_Text>().text = trades.HomePlanet;
             GameObject.Find(button.name + "/FrameOutActiveTransport/OutActiveTransports").GetComponent<TMP_Text>().text = trades.Transports.Count.ToString();
-            GameObject.Find(button.name + "/FrameOutPMCs/OutActivePMCs").GetComponent<TMP_Text>().text = trades.PMCs.Count.ToString();
+          
+            GameObject.Find(button.name + "/FrameOutPMCs/OutActivePMCS").GetComponent<TMP_Text>().text = trades.PMCs.Count.ToString();
             GameObject.Find(button.name + "/FrameOutCapacity/OutTransportCapacity").GetComponent<TMP_Text>().text = trades.Cargocapacity().ToString();
             string materialBuilder = "| ";
             foreach (string item in trades.TransportedMaterials)

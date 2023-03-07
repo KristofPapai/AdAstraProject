@@ -10,6 +10,10 @@ public class CreateTradeRoute : MonoBehaviour
     public TMP_Text SelectedPlanet;
     public TMP_Text SelectedMaterial;
 
+    public GameObject TradeContainer;
+    public GameObject TradeCommanderPrefab;
+
+
     public void OnClick()
     {
         FleetMaster fleetMaster = GameObject.Find("ScriptMaster").GetComponent<FleetMaster>();
@@ -50,6 +54,12 @@ public class CreateTradeRoute : MonoBehaviour
                 fleetMaster.PMCships.Remove(pmc);
             }
             fleetMaster.UpdateTradeInfo();
+            GameObject tempCommand = GameObject.Instantiate(TradeCommanderPrefab,TradeContainer.transform);
+            tempCommand.GetComponent<FleetCommander>().SpecificTrade = TradeSave;
+            tempCommand.name = TradeSave.TradeRouteName;
+
+
+
         }
         
     }

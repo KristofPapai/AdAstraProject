@@ -10,6 +10,7 @@ public class TransportClass
     public double Firepower;
     public double Armor;
     public string Status;
+    
 
     public TransportClass()
     {

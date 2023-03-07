@@ -108,6 +108,23 @@ public class BuildingMaster : MonoBehaviour
     }
 
 
+    public double DeductStockpile(string MaterialName, double MaterialAmount)
+    {
+        if (stockpile[MaterialName] - MaterialAmount >= 0)
+        {
+            stockpile[MaterialName] = stockpile[MaterialName] - MaterialAmount;
+            return MaterialAmount;
+        }
+        else
+        {
+            double tempDouble = stockpile[MaterialName] - MaterialAmount;
+            MaterialAmount = MaterialAmount + tempDouble;
+            stockpile[MaterialName] = 0;
+            return MaterialAmount;
+        }
+    }
+
+
     public void GenerateReasurces()
     {
         _timer += Time.deltaTime;

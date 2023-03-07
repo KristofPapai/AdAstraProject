@@ -10,6 +10,7 @@ public class TradeRouteClass
     public string TradeRouteName;
     public string HomePlanet;
     public string TargetPlanet;
+    public int LoadedCargo;
     public List<TransportClass> Transports = new List<TransportClass>();
     public List<PmcClass> PMCs = new List<PmcClass>();
     public List<string> TransportedMaterials = new List<string>();

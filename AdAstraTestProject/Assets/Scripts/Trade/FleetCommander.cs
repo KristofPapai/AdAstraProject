@@ -76,7 +76,7 @@ public class FleetCommander : MonoBehaviour
     {
         float LoadUpTime = (float)SpecificTrade.Cargocapacity()/2;
         double LoadedMaterial = 0;
-        if (TargetPlanet.GetComponent<BuildingMaster>().stockpile != null)
+        if (TargetPlanet.GetComponent<BuildingMaster>().stockpile.Count != 0)
         {
             LoadedMaterial = TargetPlanet.GetComponent<BuildingMaster>().DeductStockpile(SpecificTrade.TransportedMaterials[0], SpecificTrade.Cargocapacity());
         }

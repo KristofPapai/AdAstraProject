@@ -80,6 +80,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\Building\DestroyQueueItem.cs" />
+    <Compile Include="Assets\Scripts\Trade\FleetCommander.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\PorceduralPlanet\Noise.cs" />
@@ -141,7 +142,9 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Fleet\MultiButton.cs" />
-    <Compile Include="Assets\Scripts\Trade\FleetCommander.cs" />
+    <Compile Include="Assets\Scripts\Trade\ModifyTradeRoute.cs" />
+    <Compile Include="Assets\Scripts\Trade\SelectedTradeSave.cs" />
+    <Compile Include="Assets\Scripts\Trade\PrefabModifyClick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

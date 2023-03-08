@@ -57,7 +57,7 @@ public class CreateTradeRoute : MonoBehaviour
             GameObject tempCommand = GameObject.Instantiate(TradeCommanderPrefab,TradeContainer.transform);
             tempCommand.GetComponent<FleetCommander>().SpecificTrade = TradeSave;
             tempCommand.name = TradeSave.TradeRouteName;
-
+            tempCommand.GetComponent<PrefabModifyClick>().StoredRoute = TradeSave;
 
 
         }
@@ -73,6 +73,7 @@ public class CreateTradeRoute : MonoBehaviour
         if ((int.Parse(TransportFleetSize.text) - int.Parse(NumOfTransport.text)) >= 0 &&
             (int.Parse(PMCFleetSize.text) - int.Parse(NumOfPMC.text)) >= 0 &&
             GameObject.Find("ScriptMaster").GetComponent<ResourceMaster>().OutUniEuros - 1000 >= 0
+            && int.Parse(NumOfTransport.text) >= 1 &&int.Parse(NumOfPMC.text) >= 0
             )
         {
             return true;

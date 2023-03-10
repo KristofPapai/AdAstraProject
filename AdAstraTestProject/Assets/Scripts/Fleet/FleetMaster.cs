@@ -43,6 +43,9 @@ public class FleetMaster : MonoBehaviour
     public GameObject TradeCardVeriticalLayout;
     public GameObject ButtonPrefab;
 
+    public GameObject ModifyTradeRoutePage;
+    public GameObject CreateTradeRoutePage;
+
     public void UpdateTradeInfo()
     {
         while (TradeCardVeriticalLayout.transform.childCount > 0)
@@ -53,13 +56,15 @@ public class FleetMaster : MonoBehaviour
         {
             GameObject button = Instantiate(ButtonPrefab, TradeCardVeriticalLayout.transform);
             button.transform.SetParent(TradeCardVeriticalLayout.transform);
+            button.GetComponent<PrefabModifyClick>().ModifyTradeRoute = ModifyTradeRoutePage;
+            button.GetComponent<PrefabModifyClick>().CreateTradeRoute = CreateTradeRoutePage;
+            button.GetComponent<PrefabModifyClick>().StoredRoute = trades;
             button.name = trades.TradeRouteName;
             //GameObject.Find(item.Name + "/TextBuildingName").GetComponent<TMP_Text>().text = item.Name;
             GameObject.Find(button.name + "/OutTradeRouteName").GetComponent<TMP_Text>().text = trades.TradeRouteName;
             GameObject.Find(button.name + "/FrameTargetPlanet/OutTargetPlanet").GetComponent<TMP_Text>().text = trades.TargetPlanet;
             GameObject.Find(button.name + "/FrameOutHomePlanet/OutHomePlanet").GetComponent<TMP_Text>().text = trades.HomePlanet;
             GameObject.Find(button.name + "/FrameOutActiveTransport/OutActiveTransports").GetComponent<TMP_Text>().text = trades.Transports.Count.ToString();
-          
             GameObject.Find(button.name + "/FrameOutPMCs/OutActivePMCS").GetComponent<TMP_Text>().text = trades.PMCs.Count.ToString();
             GameObject.Find(button.name + "/FrameOutCapacity/OutTransportCapacity").GetComponent<TMP_Text>().text = trades.Cargocapacity().ToString();
             string materialBuilder = "| ";
@@ -227,10 +232,13 @@ public class FleetMaster : MonoBehaviour
     public TMP_Text CargoCapacity;
     public TMP_Text DeltaVReq;
     public TMP_Text Cost;
+    public TMP_Text ModifyTransportNum;
+    public TMP_Text ModifyCargoCapacity;
     public int CurrentCargoCapPerShip = 20; //ez majd scalelhet
     public void UpdateTradeProps()
     {
         CargoCapacity.text = (int.Parse(NumOfTradeShips.text) * CurrentCargoCapPerShip).ToString() + " Unit";
+        ModifyCargoCapacity.text = (int.Parse(ModifyTransportNum.text) * CurrentCargoCapPerShip).ToString() + " Unit";
     }
 
 

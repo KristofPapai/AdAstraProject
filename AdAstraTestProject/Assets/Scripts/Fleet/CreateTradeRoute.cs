@@ -13,6 +13,9 @@ public class CreateTradeRoute : MonoBehaviour
     public GameObject TradeContainer;
     public GameObject TradeCommanderPrefab;
 
+    public GameObject CreateTradeRoutePage;
+    public GameObject ModifyTradeRoute;
+
 
     public void OnClick()
     {
@@ -54,14 +57,20 @@ public class CreateTradeRoute : MonoBehaviour
                 fleetMaster.PMCships.Remove(pmc);
             }
             fleetMaster.UpdateTradeInfo();
+            //ModifyTradeRoute.SetActive(true);
             GameObject tempCommand = GameObject.Instantiate(TradeCommanderPrefab,TradeContainer.transform);
             tempCommand.GetComponent<FleetCommander>().SpecificTrade = TradeSave;
             tempCommand.name = TradeSave.TradeRouteName;
-            tempCommand.GetComponent<PrefabModifyClick>().StoredRoute = TradeSave;
+
+            //ModifyTradeRoute.SetActive(true);
+            //tempCommand.GetComponent<PrefabModifyClick>().ModifyTradeRoute = ModifyTradeRoute;
+            //tempCommand.GetComponent<PrefabModifyClick>().CreateTradeRoute = CreateTradeRoutePage;
+            //tempCommand.GetComponent<PrefabModifyClick>().StoredRoute = TradeSave;
+            //ModifyTradeRoute.SetActive(false);
 
 
         }
-        
+
     }
 
 

@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Building\ShowBuildingPopup.cs" />
     <Compile Include="Assets\Scripts\bloomflicker.cs" />
     <Compile Include="Assets\Scripts\Fleet\PmcClass.cs" />
+    <Compile Include="Assets\Scripts\Trade\ModifyTradeRoute.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Scripts\Resource\generatedMIT.cs" />
     <Compile Include="Assets\Scripts\ConditionalHideAttribute.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Assets\Scripts\PorceduralPlanet\ColorSettings.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\Scripts\Trade\SelectedTradeSave.cs" />
     <Compile Include="Assets\Scripts\Building\DestroyQueueItem.cs" />
     <Compile Include="Assets\Scripts\Trade\FleetCommander.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\Building\BuildTimer.cs" />
     <Compile Include="Assets\Scripts\DinamicUI.cs" />
+    <Compile Include="Assets\Scripts\Trade\PrefabModifyClick.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Fleet\FleetMaster.cs" />
@@ -142,9 +145,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Fleet\MultiButton.cs" />
-    <Compile Include="Assets\Scripts\Trade\ModifyTradeRoute.cs" />
-    <Compile Include="Assets\Scripts\Trade\SelectedTradeSave.cs" />
-    <Compile Include="Assets\Scripts\Trade\PrefabModifyClick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

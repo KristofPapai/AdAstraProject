@@ -1,4 +1,4 @@
-using OpenCover.Framework.Model;
+//using OpenCover.Framework.Model;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ public class BuildingMaster : MonoBehaviour
 {
 
     //felépítése a épületek elnevezésének név/szukséges unieuros/tech/fix érkezés? unieuros/tech/építésiid?
-    public File txtBuildings = new File();
+    //public File txtBuildings = new File();
 
     public List<string> UpgradeBuildings = new List<string>() { "FOB", "Outpost", "Permament Base Facility" };
     //public List<string> lvl1Buildings = new List<string>() { "Rover Hangar,200,50,10,0,10", "Research Quarters,100,200,10,50,120", "Operation Deck,300,20,10,10,120" }; //making a small ammount of money and tech

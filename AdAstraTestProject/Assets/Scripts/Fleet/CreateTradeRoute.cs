@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -22,8 +23,21 @@ public class CreateTradeRoute : MonoBehaviour
         FleetMaster fleetMaster = GameObject.Find("ScriptMaster").GetComponent<FleetMaster>();
         if (Validation() == true)
         {
+            List<int> tempIds = new List<int>();
+            foreach (TradeRouteClass trade in fleetMaster.TradeRoutes)
+            {
+                tempIds.Add(trade.TradeRouteID);
+            }
+
+
             TradeRouteClass TradeSave = new TradeRouteClass();
-            TradeSave.TradeRouteID = Random.Range(1, 1000);
+            int AddID = 0;
+            do
+            {
+                AddID = Random.Range(1, 1000);
+
+            } while (tempIds.Contains(AddID));
+            TradeSave.TradeRouteID = AddID;
             TradeSave.TradeRouteName = "Trade route No.: " + TradeSave.TradeRouteID;
             TradeSave.HomePlanet = fleetMaster.HomePlanet.text;
             TradeSave.TargetPlanet = SelectedPlanet.text;

@@ -12,7 +12,7 @@ public class PlanetProperties : MonoBehaviour
     public double GenTech;
     public bool IsMotherPlanet = false;
 
-    List<string> RareMaterials = new List<string>() { "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium" }; // "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium"
+    public List<string> RareMaterials = new List<string>() { "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium" }; // "iron", "nickel", "iridium", "palladium", "platinum", "gold", "magnesium"
     //public List<string> PlanetRareMaterials = new List<string>();
     public Dictionary<string, double> PlanetRareMaterials = new Dictionary<string, double>();
 

@@ -10,6 +10,7 @@ public class FleetCommander : MonoBehaviour
     private bool LoadedUp = false;
     GameObject HomePlanet;
     GameObject TargetPlanet;
+    public LineRenderer Line;
 
     private void Start()
     {
@@ -44,16 +45,35 @@ public class FleetCommander : MonoBehaviour
             
         }
 
+        //Line.startColor = Color.red;
+        //Line.endColor = Color.red;
+
+        //Line.startWidth = 0.3f;
+        //Line.endWidth = 0.3f;
+
+        //Line.SetPosition(0, HomePlanet.transform.position);
+        //Line.SetPosition(1, TargetPlanet.transform.position);
+
+
+    }
+
+
+    public void DrawLine()
+    {
+        Line.startWidth = 0.3f;
+        Line.endWidth = 0.3f;
+
+        Line.SetPosition(0, HomePlanet.transform.position);
+        Line.SetPosition(1, TargetPlanet.transform.position);
     }
 
     IEnumerator Transit()
     {
         float distance = CalculateDistance();
         Debug.Log("Transit The fleet is in transit with the distance to cover : "+distance);
-        distance = 10;
+
         yield return new WaitForSeconds(distance);
         InTransit = false;
-        Debug.Log("Vége a transitnak");
 
 
     }
@@ -62,13 +82,13 @@ public class FleetCommander : MonoBehaviour
     {
         float distance = CalculateDistance();
         Debug.Log("HomeTransit The fleet is in transit with the distance to cover : " + distance);
-        distance = 10;
+
         yield return new WaitForSeconds(distance);
         InTransit = false;
         OnHomePlanet = true;
         LoadedUp = false;
         HomePlanet.GetComponent<BuildingMaster>().AddHomeStockpile(SpecificTrade.TransportedMaterials[0],SpecificTrade.LoadedCargo);
-        Debug.Log("Deload");
+
 
     }
 
@@ -84,8 +104,7 @@ public class FleetCommander : MonoBehaviour
         yield return new WaitForSeconds(LoadUpTime);
         LoadedUp = true;
         InTransit = true;
-        Debug.Log("Sikeres Load");
-        Debug.Log(LoadedMaterial);
+
     }
 
 }

@@ -13,6 +13,7 @@ public class OrbitMaster : MonoBehaviour
 
     public GameObject prefab;
     public GameObject parentPrefab;
+    public GameObject GasGiantPrefab;
     public GameObject ChaseCamera;
     public float rotationSpeed;
     public float dampAnt;
@@ -30,6 +31,8 @@ public class OrbitMaster : MonoBehaviour
         Debug.Log(Application.persistentDataPath);
         SystemGeneration();
     }
+
+
 
 
     public void SystemGeneration()
@@ -83,8 +86,18 @@ public class OrbitMaster : MonoBehaviour
             var parentPlanet = Instantiate(parentPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)); //inside the sun lehet itt van probléma mivel nem a küzéppont körül forog normálisan a bolygó a (0,0,0) pontal lesz valami
             parentPlanet.GetComponent<RotateMaster>().dampAnt = dampningUpdate;
             dampningUpdate -= 0.5f;
-            var childPlanet = Instantiate(prefab, new Vector3(newX, 0, 0), Quaternion.identity);
+            int typeOfPlanet = Random.Range(0, 4);
+            var childPlanet = GasGiantPrefab;
+            if (typeOfPlanet == 1)
+            {
+                //gas Giant
+                childPlanet = Instantiate(GasGiantPrefab, new Vector3(newX, 0, 0), Quaternion.identity);
 
+            }
+            else
+            {
+                childPlanet = Instantiate(prefab, new Vector3(newX, 0, 0), Quaternion.identity);
+            }
             bool goodName = false;
             do
             {
@@ -98,7 +111,7 @@ public class OrbitMaster : MonoBehaviour
 
             } while (goodName != true);
             
-            int typeOfPlanet = Random.Range(0, 4);
+            //int typeOfPlanet = Random.Range(0, 4);
             float sizeOfPlanet;
             //ha 0-nál több holdat akar generálni akkor majd figyelni kell a oldak távolságára
 
@@ -107,6 +120,7 @@ public class OrbitMaster : MonoBehaviour
                 case 0:
                     sizeOfPlanet = Random.Range(4, 7);
                     childPlanet.transform.localScale = new Vector3(sizeOfPlanet, sizeOfPlanet, sizeOfPlanet);
+                    childPlanet.GetComponent<Renderer>().material = PlanetMaterials[Random.RandomRange(0, PlanetMaterials.Length)];
                     if (!haveMotherPlanet)
                     {
                         childPlanet.GetComponent<PlanetProperties>().IsMotherPlanet = true;
@@ -118,6 +132,8 @@ public class OrbitMaster : MonoBehaviour
                 case 1:
                     sizeOfPlanet = Random.Range(20, 30);
                     childPlanet.transform.localScale = new Vector3(sizeOfPlanet, sizeOfPlanet, sizeOfPlanet);
+                    childPlanet.GetComponent<Renderer>().material = PlanetMaterials[3];
+
                     //Debug.Log("Gas giant");
                     if (!haveMotherPlanet)
                     {
@@ -129,6 +145,8 @@ public class OrbitMaster : MonoBehaviour
                 case 3:
                     sizeOfPlanet = Random.Range(2, 5);
                     childPlanet.transform.localScale = new Vector3(sizeOfPlanet, sizeOfPlanet, sizeOfPlanet);
+                    childPlanet.GetComponent<Renderer>().material = PlanetMaterials[Random.RandomRange(0, PlanetMaterials.Length)];
+
                     //Debug.Log("dwarf planet");
                     if (!haveMotherPlanet)
                     {

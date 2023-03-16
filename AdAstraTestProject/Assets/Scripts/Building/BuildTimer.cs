@@ -47,7 +47,7 @@ public class BuildTimer : MonoBehaviour
             currentPlanet.GetComponent<BuildingMaster>().GenerateMIT(curentBuildingData.UniEurosGenerate, curentBuildingData.InfluenceGenerate, curentBuildingData.TechGenerate);
             currentPlanet.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Add(curentBuildingData);
             Debug.Log(curentBuildingData.Name);
-            if (this.name == "queue item,Warehouses")
+            if (this.name == "queue item,Warehouses, "+currentPlanetName)
             {
                 isStockpile();
                 if (GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected != null && GameObject.Find("ScriptMaster").GetComponent<CameraMoveOnClick>().selected == currentPlanet)

@@ -134,6 +134,7 @@ public class CameraMoveOnClick : MonoBehaviour
         refreshPlanetMaterial(Selected);
         if (selected.GetComponent<BuildingMaster>().classBuiltGroundBuildings.Any(x => (x.Name == "Warehouses")))
         {
+            Debug.Log("stockpileListing listing hivodik");
             stockpileListing(selected);
         }
         else

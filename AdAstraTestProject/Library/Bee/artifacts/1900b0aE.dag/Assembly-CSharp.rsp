@@ -407,6 +407,7 @@
 "Assets/Scripts/RestartGame.cs"
 "Assets/Scripts/RotateMaster.cs"
 "Assets/Scripts/SolarSystem.cs"
+"Assets/Scripts/Trade/DrawTradeRoutes.cs"
 "Assets/Scripts/Trade/FleetCommander.cs"
 "Assets/Scripts/Trade/ModifyTradeRoute.cs"
 "Assets/Scripts/Trade/PrefabModifyClick.cs"

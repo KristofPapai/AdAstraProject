@@ -180,26 +180,7 @@ public class FleetMaster : MonoBehaviour
     public TMP_Dropdown Dropdown;
 
 
-    //public void updateMaterialDorpdown()
-    //{
-    //    if (Dropdown.itemText.text != "Select target planet" && Dropdown.itemText.text != "")
-    //    {
-    //        string PlanetName = Dropdown.options[Dropdown.value].text;
-    //        GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
-    //        foreach (GameObject planet in planets)
-    //        {
-    //            if (planet.name == PlanetName)
-    //            {
-    //                List<string> tempMatList = new List<string>();
-    //                foreach (string material in planet.GetComponent<PlanetProperties>().PlanetRareMaterials.Keys)
-    //                {
-    //                    tempMatList.Add(material);
-    //                    Debug.Log(material);
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
+    
 
     public GameObject PrefabTradePlanetButton;
     public GameObject PrefabTradeMaterialButton;

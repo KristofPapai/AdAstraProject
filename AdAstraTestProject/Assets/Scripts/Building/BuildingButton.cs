@@ -12,8 +12,10 @@ public class BuildingButton : MonoBehaviour
     public void buildBuilding()
     {
         string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
+        //Debug.Log(currentPlanetName);
         GameObject currentPlanet = GameObject.Find(currentPlanetName);
         currentButtonData = this.GetComponent<StoreClassObject>().saveBuilding;
+        
         if (currentPlanet.GetComponent<BuildingMaster>().enoughResource_UE_TECH(currentButtonData.UniEurosPrice, currentButtonData.TechPrice))
         {
             pushToQueue();
@@ -45,15 +47,15 @@ public class BuildingButton : MonoBehaviour
     public void pushToQueue()
     {
         queueVerticalLayout = GameObject.Find("QueueVerticalLayout");
-        
+        string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
         GameObject queueitem = Instantiate(queueItemPrefab, queueVerticalLayout.transform);
         queueitem.transform.SetParent(queueVerticalLayout.transform);
         queueitem.GetComponent<StoreClassObject>().saveBuilding = currentButtonData;
-        queueitem.transform.name = "queue item,"+this.name;
+        queueitem.transform.name = "queue item,"+this.name+", "+currentPlanetName; 
 
         GameObject.Find(queueitem.name + "/TextQueueBuildingName").GetComponent<TMP_Text>().text = currentButtonData.Name;
         GameObject.Find(queueitem.name + "/TextQueueProgress").GetComponent<TMP_Text>().text = "progress --%";
-        string currentPlanetName = GameObject.Find("CelestialName").GetComponent<TMP_Text>().text;
+        
         GameObject.Find(queueitem.name + "/TextBuildingPlanet").GetComponent<TMP_Text>().text = currentPlanetName;
 
 

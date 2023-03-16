@@ -119,9 +119,8 @@ public class ResourceMaster : MonoBehaviour
     public TMP_Text fleetUpkeep;
 
 
-    void Update()
+    void FixedUpdate()
     {
-        _timer += Time.deltaTime;
         if (_timer >= _duration)
         {
             double generatedunieuros = 0;
@@ -149,8 +148,8 @@ public class ResourceMaster : MonoBehaviour
             resourceMaster.AddUniEuros(generatedunieuros);
             resourceMaster.AddInfluence(generatedtech);
             resourceMaster.AddTech(generatedinfluence);
-
         }
+        _timer += Time.deltaTime;
     }
 
     public void AddUniEuros(double amount)

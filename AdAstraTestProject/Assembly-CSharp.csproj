@@ -111,6 +111,7 @@
     <Compile Include="Assets\Scripts\PorceduralPlanet\NoiseSettings.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\Building\BuildTimer.cs" />
+    <Compile Include="Assets\Scripts\Trade\DrawTradeRoutes.cs" />
     <Compile Include="Assets\Scripts\DinamicUI.cs" />
     <Compile Include="Assets\Scripts\Trade\PrefabModifyClick.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -145,7 +146,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Fleet\MultiButton.cs" />
-    <Compile Include="Assets\Scripts\Trade\DrawTradeRoutes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -104,4 +104,42 @@ public class GenericMultiButton : MonoBehaviour
 
         }
     }
+
+    GameObject MotherPlanet;
+
+    public void ValidateAmount()
+    {
+        GameObject[] planets = GameObject.FindGameObjectsWithTag("Celestial");
+        foreach (GameObject planet in planets)
+        {
+            if (planet.GetComponent<PlanetProperties>().IsMotherPlanet == true)
+            {
+                MotherPlanet = planet;
+            }
+        }
+        string material = transform.parent.name.Split(" ")[0].ToLower();
+        int Amount = int.Parse(NumToChange.text);
+        //MotherPlanet.GetComponent<BuildingMaster>().AddHomeStockpile(material, 10);
+
+        if (this.GetComponentInChildren<TMP_Text>().text == "<")
+        {
+            if (Amount != 0)
+            {
+                Amount--;
+                NumToChange.text = Amount.ToString();
+            }
+        }
+
+        //Increase
+        if (this.GetComponentInChildren<TMP_Text>().text == ">")
+        {
+            double CurrentAmount = MotherPlanet.GetComponent<BuildingMaster>().ReturnHomeStockpileAmount(material);
+            if (CurrentAmount > int.Parse(NumToChange.text))
+            {
+                Amount++;
+                NumToChange.text = Amount.ToString();
+            }
+
+        }
+    }
 }

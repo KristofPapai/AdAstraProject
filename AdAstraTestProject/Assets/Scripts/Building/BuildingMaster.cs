@@ -79,6 +79,11 @@ public class BuildingMaster : MonoBehaviour
         {
             HomeStockpile.Add(mat, 0);
         }
+        HomeStockpile["iron"] = 10;
+        HomeStockpile["gold"] = 100;
+        HomeStockpile["magnesium"] = 100;
+
+        //Debug.Log(HomeStockpile.ElementAt(6).Value);
 
     }
 
@@ -86,6 +91,17 @@ public class BuildingMaster : MonoBehaviour
 
     private double WorkerGenerationBonus = 1f;
     private double BaseMineGeneration = 2f;
+
+    public double ReturnHomeStockpileAmount(string MaterialName)
+    {
+        return HomeStockpile[MaterialName];
+    }
+
+    public double returnAmountByIndex(int i)
+    {
+        //Debug.Log(HomeStockpile.Count());
+        return HomeStockpile.ElementAt(i).Value;
+    }
 
     public void AddHomeStockpile(string MaterialName, double MaterialAmount)
     {

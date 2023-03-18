@@ -90,7 +90,7 @@ public class ResourceMaster : MonoBehaviour
 
     void Start()
     {
-        
+        GenerateMaster();
     }
 
 
@@ -123,34 +123,40 @@ public class ResourceMaster : MonoBehaviour
     {
         if (_timer >= _duration)
         {
-            double generatedunieuros = 0;
-            double generatedtech = 0;
-            double generatedinfluence = 0;
-
-            planets = GameObject.FindGameObjectsWithTag("Celestial");
-            _timer = 0f;
-            generatedunieuros -= this.GetComponent<FleetMaster>().FullUpkeep;
-            foreach (GameObject planet in planets)
-            {
-                //resourceMaster.AddUniEuros(planet.GetComponent<PlanetProperties>().GenUniEuros);
-                //resourceMaster.AddInfluence(planet.GetComponent<PlanetProperties>().GenInfluence);
-                //resourceMaster.AddTech(planet.GetComponent<PlanetProperties>().GenTech);
-                generatedunieuros += planet.GetComponent<PlanetProperties>().GenUniEuros;
-                generatedtech += planet.GetComponent<PlanetProperties>().GenTech;
-                generatedinfluence += planet.GetComponent<PlanetProperties>().GenInfluence;
-            }
-            OutUniEuros = resourceMaster.UniEuros;
-            OutInfluence = resourceMaster.Influence;
-            OutTech = resourceMaster.Tech;
-            genuni.text = "" + generatedunieuros;
-            gentech.text = "" + generatedtech;
-            geninf.text = "" + generatedinfluence;
-            resourceMaster.AddUniEuros(generatedunieuros);
-            resourceMaster.AddInfluence(generatedtech);
-            resourceMaster.AddTech(generatedinfluence);
+            GenerateMaster();
         }
         _timer += Time.deltaTime;
     }
+
+    public void GenerateMaster()
+    {
+        double generatedunieuros = 0;
+        double generatedtech = 0;
+        double generatedinfluence = 0;
+
+        planets = GameObject.FindGameObjectsWithTag("Celestial");
+        _timer = 0f;
+        generatedunieuros -= this.GetComponent<FleetMaster>().FullUpkeep;
+        foreach (GameObject planet in planets)
+        {
+            //resourceMaster.AddUniEuros(planet.GetComponent<PlanetProperties>().GenUniEuros);
+            //resourceMaster.AddInfluence(planet.GetComponent<PlanetProperties>().GenInfluence);
+            //resourceMaster.AddTech(planet.GetComponent<PlanetProperties>().GenTech);
+            generatedunieuros += planet.GetComponent<PlanetProperties>().GenUniEuros;
+            generatedtech += planet.GetComponent<PlanetProperties>().GenTech;
+            generatedinfluence += planet.GetComponent<PlanetProperties>().GenInfluence;
+        }
+        OutUniEuros = resourceMaster.UniEuros;
+        OutInfluence = resourceMaster.Influence;
+        OutTech = resourceMaster.Tech;
+        genuni.text = "" + generatedunieuros;
+        gentech.text = "" + generatedtech;
+        geninf.text = "" + generatedinfluence;
+        resourceMaster.AddUniEuros(generatedunieuros);
+        resourceMaster.AddInfluence(generatedtech);
+        resourceMaster.AddTech(generatedinfluence);
+    }
+
 
     public void AddUniEuros(double amount)
     {

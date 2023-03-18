@@ -28,7 +28,6 @@ public class OrbitMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(Application.persistentDataPath);
         SystemGeneration();
     }
 

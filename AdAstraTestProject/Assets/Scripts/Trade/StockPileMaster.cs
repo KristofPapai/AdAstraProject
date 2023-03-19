@@ -30,7 +30,6 @@ public class StockPileMaster : MonoBehaviour
         
         for (int i = 0; i < Stocks.Length; i++)
         {
-            Debug.Log(i);
             Stocks[i].text = MotherPlanet.GetComponent<BuildingMaster>().returnAmountByIndex(i).ToString();
         }
     }
